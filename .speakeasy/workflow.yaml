@@ -1,0 +1,13 @@
+workflowVersion: 1.0.0
+speakeasyVersion: latest
+sources:
+    Semva:
+        inputs:
+            - location: https://api.semva.dev/openapi.json
+        output: .speakeasy/out.openapi.yaml
+        registry:
+            location: registry.speakeasyapi.dev/panora-technologies-inc/semva/semva
+targets:
+    semva:
+        target: cli
+        source: Semva

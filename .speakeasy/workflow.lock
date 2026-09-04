@@ -1,0 +1,29 @@
+speakeasyVersion: 1.796.4
+sources:
+    Semva:
+        sourceNamespace: semva
+        sourceRevisionDigest: sha256:c6c9e6a55e30e3fa65eb91aea052d93474127523de88d04fcdbd69b359422767
+        sourceBlobDigest: sha256:b2c73879b094f3bbd4d3f87e1e7ffdf45c4d560716a7d91b0db30c0e53b53b42
+        tags:
+            - latest
+            - 0.1.0
+targets:
+    semva:
+        source: Semva
+        sourceNamespace: semva
+        sourceRevisionDigest: sha256:c6c9e6a55e30e3fa65eb91aea052d93474127523de88d04fcdbd69b359422767
+        sourceBlobDigest: sha256:b2c73879b094f3bbd4d3f87e1e7ffdf45c4d560716a7d91b0db30c0e53b53b42
+workflow:
+    workflowVersion: 1.0.0
+    speakeasyVersion: latest
+    sources:
+        Semva:
+            inputs:
+                - location: https://api.semva.dev/openapi.json
+            output: .speakeasy/out.openapi.yaml
+            registry:
+                location: registry.speakeasyapi.dev/panora-technologies-inc/semva/semva
+    targets:
+        semva:
+            target: cli
+            source: Semva
