@@ -54,8 +54,6 @@ type Semva struct {
 	Twins *Twins
 	// Create and edit isolated provider sandboxes. Each sandbox contains behavioural twins from the `twins` package.
 	Sandboxes *Sandboxes
-	// Healthcheck endpoints
-	Healthchecks *Healthchecks
 
 	sdkConfiguration config.SDKConfiguration
 	hooks            *hooks.Hooks
@@ -120,10 +118,10 @@ func WithTimeout(timeout time.Duration) SDKOption {
 // New creates a new instance of the SDK with the provided serverURL and options
 func New(serverURL string, opts ...SDKOption) *Semva {
 	sdk := &Semva{
-		SDKVersion: "0.0.1",
+		SDKVersion: "0.1.0",
 		sdkConfiguration: config.SDKConfiguration{
-			UserAgent:         "speakeasy-sdk/go 0.0.1 2.935.1 0.1.0 github.com/panoratech/semva-cli/internal/sdk",
-			SDKVersion:        "0.0.1",
+			UserAgent:         "speakeasy-sdk/go 0.1.0 2.935.1 0.1.0 github.com/panoratech/semva-cli/internal/sdk",
+			SDKVersion:        "0.1.0",
 			GenVersion:        "2.935.1",
 			OpenAPIDocVersion: "0.1.0",
 		},
@@ -147,7 +145,6 @@ func New(serverURL string, opts ...SDKOption) *Semva {
 	sdk.APIKeys = newAPIKeys(sdk, sdk.sdkConfiguration, sdk.hooks)
 	sdk.Twins = newTwins(sdk, sdk.sdkConfiguration, sdk.hooks)
 	sdk.Sandboxes = newSandboxes(sdk, sdk.sdkConfiguration, sdk.hooks)
-	sdk.Healthchecks = newHealthchecks(sdk, sdk.sdkConfiguration, sdk.hooks)
 
 	return sdk
 }

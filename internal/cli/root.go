@@ -5,7 +5,6 @@ package cli
 import (
 	"fmt"
 	"github.com/panoratech/semva-cli/internal/cli/apikeys"
-	"github.com/panoratech/semva-cli/internal/cli/healthchecks"
 	"github.com/panoratech/semva-cli/internal/cli/organizations"
 	"github.com/panoratech/semva-cli/internal/cli/sandboxes"
 	"github.com/panoratech/semva-cli/internal/cli/twins"
@@ -65,9 +64,6 @@ func NewRootCommand() (*cobra.Command, error) {
 	}
 	if err := sandboxes.InitSandboxesRoot(rootCmd); err != nil {
 		return nil, fmt.Errorf("init sandboxes: %w", err)
-	}
-	if err := healthchecks.InitHealthchecksRoot(rootCmd); err != nil {
-		return nil, fmt.Errorf("init healthchecks: %w", err)
 	}
 	if err := initConfigureCmd(rootCmd); err != nil {
 		return nil, fmt.Errorf("init configure: %w", err)
