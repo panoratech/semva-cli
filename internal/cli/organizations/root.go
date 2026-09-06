@@ -28,6 +28,10 @@ func InitOrganizationsRoot(parent *cobra.Command) error {
 		return err
 	}
 
+	if err := initEnsureDefaultOrganizationCmd(OrganizationsCmd); err != nil {
+		return err
+	}
+
 	if err := initReadCurrentOrganizationCmd(OrganizationsCmd); err != nil {
 		return err
 	}

@@ -176,6 +176,7 @@ Configuration is stored in `~/.config/semva/config.yaml`.
 
 * [`list`](docs/semva_organizations_list.md) - List your organizations
 * [`create`](docs/semva_organizations_create.md) - Create an organization
+* [`ensure-default`](docs/semva_organizations_ensure-default.md) - Create your first organization
 * [`read-current`](docs/semva_organizations_read-current.md) - Read the active organization
 * [`rename-current`](docs/semva_organizations_rename-current.md) - Rename the active organization
 
@@ -217,11 +218,6 @@ Configuration is stored in `~/.config/semva/config.yaml`.
 
 * [`list`](docs/semva_sandboxes_logs_list.md) - List recent sandbox request logs
 * [`get`](docs/semva_sandboxes_logs_get.md) - Retrieve a sandbox request log
-
-### [healthchecks](docs/semva_healthchecks.md)
-
-* [`read-root`](docs/semva_healthchecks_read-root.md) - Read Root
-* [`read-health`](docs/semva_healthchecks_read-health.md) - Read Health
 
 </details>
 <!-- End Available Commands [operations] -->

@@ -2,8 +2,8 @@ speakeasyVersion: 1.796.4
 sources:
     Semva:
         sourceNamespace: semva
-        sourceRevisionDigest: sha256:c6c9e6a55e30e3fa65eb91aea052d93474127523de88d04fcdbd69b359422767
-        sourceBlobDigest: sha256:b2c73879b094f3bbd4d3f87e1e7ffdf45c4d560716a7d91b0db30c0e53b53b42
+        sourceRevisionDigest: sha256:8422aeaad9520a96619b3244bba621b3e65bd4c5ea9846c0d762bbceb2dd70de
+        sourceBlobDigest: sha256:9e720a134fb71039e78b4c76285bf43d7109add32081900f7b6e575c56a03577
         tags:
             - latest
             - 0.1.0
@@ -11,8 +11,8 @@ targets:
     semva:
         source: Semva
         sourceNamespace: semva
-        sourceRevisionDigest: sha256:c6c9e6a55e30e3fa65eb91aea052d93474127523de88d04fcdbd69b359422767
-        sourceBlobDigest: sha256:b2c73879b094f3bbd4d3f87e1e7ffdf45c4d560716a7d91b0db30c0e53b53b42
+        sourceRevisionDigest: sha256:8422aeaad9520a96619b3244bba621b3e65bd4c5ea9846c0d762bbceb2dd70de
+        sourceBlobDigest: sha256:9e720a134fb71039e78b4c76285bf43d7109add32081900f7b6e575c56a03577
 workflow:
     workflowVersion: 1.0.0
     speakeasyVersion: latest

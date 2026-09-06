@@ -39,6 +39,7 @@ semva organizations [flags]
 
 * [semva](semva.md)	 - Semva: Backend API
 * [semva organizations create](semva_organizations_create.md)	 - Create an organization
+* [semva organizations ensure-default](semva_organizations_ensure-default.md)	 - Create your first organization
 * [semva organizations list](semva_organizations_list.md)	 - List your organizations
 * [semva organizations read-current](semva_organizations_read-current.md)	 - Read the active organization
 * [semva organizations rename-current](semva_organizations_rename-current.md)	 - Rename the active organization
