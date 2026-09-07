@@ -6,6 +6,7 @@ package sdk
 
 import (
 	"context"
+	"fmt"
 	"github.com/panoratech/semva-cli/internal/sdk/models/components"
 	"github.com/panoratech/semva-cli/internal/sdk/retry"
 	"github.com/panoratech/semva-cli/internal/sdk/sdkinternal/config"
@@ -14,6 +15,12 @@ import (
 	"net/http"
 	"time"
 )
+
+// ServerList contains the list of servers available to the SDK
+var ServerList = []string{
+	// Production
+	"https://api.semva.dev",
+}
 
 // HTTPClient provides an interface for supplying the SDK with a custom HTTP client
 type HTTPClient interface {
@@ -79,6 +86,17 @@ func WithTemplatedServerURL(serverURL string, params map[string]string) SDKOptio
 	}
 }
 
+// WithServerIndex allows the overriding of the default server by index
+func WithServerIndex(serverIndex int) SDKOption {
+	return func(sdk *Semva) {
+		if serverIndex < 0 || serverIndex >= len(ServerList) {
+			panic(fmt.Errorf("server index %d out of range", serverIndex))
+		}
+
+		sdk.sdkConfiguration.ServerIndex = serverIndex
+	}
+}
+
 // WithClient allows the overriding of the default HTTP client used by the SDK
 func WithClient(client HTTPClient) SDKOption {
 	return func(sdk *Semva) {
@@ -115,15 +133,16 @@ func WithTimeout(timeout time.Duration) SDKOption {
 	}
 }
 
-// New creates a new instance of the SDK with the provided serverURL and options
-func New(serverURL string, opts ...SDKOption) *Semva {
+// New creates a new instance of the SDK with the provided options
+func New(opts ...SDKOption) *Semva {
 	sdk := &Semva{
-		SDKVersion: "0.1.0",
+		SDKVersion: "0.1.1",
 		sdkConfiguration: config.SDKConfiguration{
-			UserAgent:         "speakeasy-sdk/go 0.1.0 2.935.1 0.1.0 github.com/panoratech/semva-cli/internal/sdk",
-			SDKVersion:        "0.1.0",
+			UserAgent:         "speakeasy-sdk/go 0.1.1 2.935.1 0.1.0 github.com/panoratech/semva-cli/internal/sdk",
+			SDKVersion:        "0.1.1",
 			GenVersion:        "2.935.1",
 			OpenAPIDocVersion: "0.1.0",
+			ServerList:        ServerList,
 		},
 		hooks: hooks.New(),
 	}
@@ -135,8 +154,6 @@ func New(serverURL string, opts ...SDKOption) *Semva {
 	if sdk.sdkConfiguration.Client == nil {
 		sdk.sdkConfiguration.Client = &http.Client{Timeout: 60 * time.Second}
 	}
-
-	sdk.sdkConfiguration.ServerURL = serverURL
 
 	sdk.sdkConfiguration = sdk.hooks.SDKInit(sdk.sdkConfiguration)
 

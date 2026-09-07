@@ -5,6 +5,7 @@ package organizations
 import (
 	"github.com/panoratech/semva-cli/internal/client"
 	"github.com/panoratech/semva-cli/internal/output"
+	"github.com/panoratech/semva-cli/internal/sdk"
 	"github.com/panoratech/semva-cli/internal/sdk/models/operations"
 	"github.com/panoratech/semva-cli/internal/usage"
 	"github.com/spf13/cobra"
@@ -41,6 +42,9 @@ func runReadCurrentOrganizationCmd(cmd *cobra.Command, args []string) error {
 	// does not cause parse failures in typed response handling.
 	if client.IsDryRun(cmd) {
 		sdkOpts = append(sdkOpts, operations.WithSkipDeserialization())
+	}
+	if err := output.ValidateGlobalServerIndex(cmd, len(sdk.ServerList)); err != nil {
+		return err
 	}
 	if output.WantsRawJSON(cmd) {
 		sdkOpts = append(sdkOpts, operations.WithSkipDeserialization())

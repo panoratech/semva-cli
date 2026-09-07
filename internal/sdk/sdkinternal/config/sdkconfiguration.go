@@ -17,6 +17,8 @@ type SDKConfiguration struct {
 	Client            HTTPClient
 	Security          func(context.Context) (interface{}, error)
 	ServerURL         string
+	ServerIndex       int
+	ServerList        []string
 	UserAgent         string
 	SDKVersion        string
 	GenVersion        string
@@ -26,5 +28,9 @@ type SDKConfiguration struct {
 }
 
 func (c *SDKConfiguration) GetServerDetails() (string, map[string]string) {
-	return c.ServerURL, map[string]string{}
+	if c.ServerURL != "" {
+		return c.ServerURL, nil
+	}
+
+	return c.ServerList[c.ServerIndex], nil
 }
