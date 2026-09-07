@@ -1,6 +1,11 @@
 # yaml-language-server: $schema=https://goreleaser.com/static/schema.json
 version: 2
 
+# The archive name_template below interpolates .ProjectName, which GoReleaser
+# otherwise defaults to the repository name — publishing semva-cli_Darwin_arm64.tar.gz
+# while scripts/install.sh fetches semva_Darwin_arm64.tar.gz. See .genignore.
+project_name: semva
+
 before:
   hooks:
     - go mod tidy

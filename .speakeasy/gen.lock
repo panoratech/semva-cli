@@ -10,9 +10,9 @@ management:
   repoURL: https://github.com/panoratech/semva-cli.git
   installationURL: https://github.com/panoratech/semva-cli
 persistentEdits:
-  generation_id: 9f5b978b-dff9-42f8-8b50-2fd055caa1b6
-  pristine_commit_hash: c133ea1bdaed863fa6d321c2efafc1771bae49f9
-  pristine_tree_hash: 64d22a821e771be476bc08f6cc0be9d37ea58836
+  generation_id: 71e9a7f3-e525-4331-902f-b1b6344a1664
+  pristine_commit_hash: 0aa67006cdbba394ae5ebd91a59176e284393ea2
+  pristine_tree_hash: b8e49d4c76c788c3fbf25ecd0443e688ba5c9c4b
 features:
   cli:
     constsAndDefaults: 0.0.0
@@ -33,10 +33,6 @@ trackedFiles:
     id: 3679a1429145
     last_write_checksum: sha1:ff4e1df729b880f7e346d013376669ee52735e11
     pristine_git_object: 847aeb6046d7cb0c98b8dfe965ed33c18e3fca93
-  .goreleaser.yaml:
-    id: 3c333d227063
-    last_write_checksum: sha1:20fe16cf98a65ba6a63d60791f95b72e8a9f4b5f
-    pristine_git_object: e6f265eab2f072fe585b2b3afdc72e40afc16296
   USAGE.md:
     id: 3aed33ce6e6f
     last_write_checksum: sha1:d01382a6a84e59c360f82053e5ef5fea29fad725
