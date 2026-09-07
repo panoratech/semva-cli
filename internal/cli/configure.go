@@ -59,9 +59,9 @@ func runConfigureCmd(cmd *cobra.Command, args []string) error {
 	keychainStored := false
 	if noInteractive, _ := cmd.Flags().GetBool("no-interactive"); noInteractive {
 		changed := false
-		if f := cmd.Flags().Lookup("access-token"); f != nil && f.Changed {
-			v, _ := cmd.Flags().GetString("access-token")
-			if config.StoreSecret("access-token", v, &cfg.Security.AccessToken) == nil {
+		if f := cmd.Flags().Lookup("organization-api-key"); f != nil && f.Changed {
+			v, _ := cmd.Flags().GetString("organization-api-key")
+			if config.StoreSecret("organization-api-key", v, &cfg.Security.OrganizationAPIKey) == nil {
 				keychainStored = true
 			}
 			changed = true
@@ -71,17 +71,17 @@ func runConfigureCmd(cmd *cobra.Command, args []string) error {
 			return fmt.Errorf("no flags provided; use flags to set values non-interactively, or remove --no-interactive")
 		}
 	} else {
-		var authAccessToken string
+		var authOrganizationAPIKey string
 		accessible := !configureIsInteractive(cmd)
 
 		var groups []*huh.Group
 		securityFields := []huh.Field{
 			huh.NewInput().
-				Title("Access token issued by WorkOS AuthKit.").
-				Description("--access-token").
+				Title("An organization API key, as minted by `POST /organizations/current/api-keys`.").
+				Description("--organization-api-key").
 				EchoMode(huh.EchoModePassword).
-				Placeholder(maskSecret(config.GetStoredSecret("access-token", cfg.Security.AccessToken))).
-				Value(&authAccessToken),
+				Placeholder(maskSecret(config.GetStoredSecret("organization-api-key", cfg.Security.OrganizationAPIKey))).
+				Value(&authOrganizationAPIKey),
 		}
 		groups = append(groups, huh.NewGroup(securityFields...).Title("Authentication"))
 
@@ -116,8 +116,8 @@ func runConfigureCmd(cmd *cobra.Command, args []string) error {
 		if err := form.Run(); err != nil {
 			return fmt.Errorf("configure: %w", err)
 		}
-		if authAccessToken != "" {
-			if config.StoreSecret("access-token", authAccessToken, &cfg.Security.AccessToken) == nil {
+		if authOrganizationAPIKey != "" {
+			if config.StoreSecret("organization-api-key", authOrganizationAPIKey, &cfg.Security.OrganizationAPIKey) == nil {
 				keychainStored = true
 			}
 		}

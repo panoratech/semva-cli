@@ -7,25 +7,6 @@ import (
 	"github.com/panoratech/semva-cli/internal/sdk/sdkinternal/utils"
 )
 
-type CreateOrganizationSecurity struct {
-	AccessToken        *string `security:"scheme,type=http,subtype=bearer,name=Authorization"`
-	OrganizationAPIKey *string `security:"scheme,type=apiKey,subtype=header,name=X-API-Key"`
-}
-
-func (c *CreateOrganizationSecurity) GetAccessToken() *string {
-	if c == nil {
-		return nil
-	}
-	return c.AccessToken
-}
-
-func (c *CreateOrganizationSecurity) GetOrganizationAPIKey() *string {
-	if c == nil {
-		return nil
-	}
-	return c.OrganizationAPIKey
-}
-
 type CreateOrganizationResponse struct {
 	HTTPMeta components.HTTPMetadata `json:"-"`
 	// The new organization and the caller's role in it

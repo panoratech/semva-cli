@@ -7,25 +7,6 @@ import (
 	"github.com/panoratech/semva-cli/internal/sdk/sdkinternal/utils"
 )
 
-type ReadMeSecurity struct {
-	AccessToken        *string `security:"scheme,type=http,subtype=bearer,name=Authorization"`
-	OrganizationAPIKey *string `security:"scheme,type=apiKey,subtype=header,name=X-API-Key"`
-}
-
-func (r *ReadMeSecurity) GetAccessToken() *string {
-	if r == nil {
-		return nil
-	}
-	return r.AccessToken
-}
-
-func (r *ReadMeSecurity) GetOrganizationAPIKey() *string {
-	if r == nil {
-		return nil
-	}
-	return r.OrganizationAPIKey
-}
-
 type ReadMeResponse struct {
 	HTTPMeta components.HTTPMetadata `json:"-"`
 	// The caller and their memberships

@@ -32,7 +32,7 @@ func newTemplates(rootSDK *Semva, sdkConfig config.SDKConfiguration, hooks *hook
 
 // List sandbox templates
 // Saved sandbox definitions. Start a sandbox from one by sending its id as `template` to `POST /sandboxes`.
-func (s *Templates) List(ctx context.Context, security operations.ListSandboxTemplatesSecurity, opts ...operations.Option) (*operations.ListSandboxTemplatesResponse, error) {
+func (s *Templates) List(ctx context.Context, opts ...operations.Option) (*operations.ListSandboxTemplatesResponse, error) {
 	o := operations.Options{}
 	supportedOptions := []string{
 		operations.SupportedOptionTimeout,
@@ -62,7 +62,7 @@ func (s *Templates) List(ctx context.Context, security operations.ListSandboxTem
 		BaseURL:          baseURL,
 		Context:          ctx,
 		OperationID:      "list_sandbox_templates",
-		SecuritySource:   utils.AsSecuritySource(security),
+		SecuritySource:   s.sdkConfiguration.Security,
 	}
 
 	timeout := o.Timeout
@@ -90,7 +90,7 @@ func (s *Templates) List(ctx context.Context, security operations.ListSandboxTem
 	req.Header.Set("Accept", "application/json")
 	req.Header.Set("User-Agent", s.sdkConfiguration.UserAgent)
 
-	if err := utils.PopulateSecurity(ctx, req, utils.AsSecuritySource(security)); err != nil {
+	if err := utils.PopulateSecurity(ctx, req, s.sdkConfiguration.Security); err != nil {
 		return nil, err
 	}
 
@@ -191,7 +191,7 @@ func (s *Templates) List(ctx context.Context, security operations.ListSandboxTem
 
 // Delete a sandbox template
 // Sandboxes already started from it are untouched.
-func (s *Templates) Delete(ctx context.Context, security operations.DeleteSandboxTemplateSecurity, request operations.DeleteSandboxTemplateRequest, opts ...operations.Option) (*operations.DeleteSandboxTemplateResponse, error) {
+func (s *Templates) Delete(ctx context.Context, request operations.DeleteSandboxTemplateRequest, opts ...operations.Option) (*operations.DeleteSandboxTemplateResponse, error) {
 	o := operations.Options{}
 	supportedOptions := []string{
 		operations.SupportedOptionTimeout,
@@ -221,7 +221,7 @@ func (s *Templates) Delete(ctx context.Context, security operations.DeleteSandbo
 		BaseURL:          baseURL,
 		Context:          ctx,
 		OperationID:      "delete_sandbox_template",
-		SecuritySource:   utils.AsSecuritySource(security),
+		SecuritySource:   s.sdkConfiguration.Security,
 	}
 
 	timeout := o.Timeout
@@ -242,7 +242,7 @@ func (s *Templates) Delete(ctx context.Context, security operations.DeleteSandbo
 	req.Header.Set("Accept", "application/json")
 	req.Header.Set("User-Agent", s.sdkConfiguration.UserAgent)
 
-	if err := utils.PopulateSecurity(ctx, req, utils.AsSecuritySource(security)); err != nil {
+	if err := utils.PopulateSecurity(ctx, req, s.sdkConfiguration.Security); err != nil {
 		return nil, err
 	}
 

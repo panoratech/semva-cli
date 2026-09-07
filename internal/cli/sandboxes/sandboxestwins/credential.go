@@ -27,8 +27,6 @@ func initCredentialCmd(parent *cobra.Command) error {
 		Example: "  semva sandboxes-twins credential --sandbox-id cc29592e-1d70-4c21-bc2e-8e72393deee2 --sandbox-twin-id 9fa09c5a-ef7c-4178-8ed1-40c62888eee8",
 		RunE:    runCredentialCmd,
 	}
-	cmd.Flags().String("access-token", "", "Security credential")
-	cmd.Flags().String("organization-api-key", "", "Security credential")
 	flagutil.RegisterFlags(cmd, credentialCmdMeta)
 	if err := flagutil.ValidateMeta[operations.CollectSandboxTwinCredentialRequest](credentialCmdMeta); err != nil {
 		return fmt.Errorf("invalid metadata for credential: %w", err)
@@ -41,15 +39,6 @@ func initCredentialCmd(parent *cobra.Command) error {
 func runCredentialCmd(cmd *cobra.Command, args []string) error {
 	if usage.UsageRequested(cmd) {
 		return usage.EmitSchema(cmd, cmd.OutOrStdout())
-	}
-	accessToken, _ := flagutil.GetStringFlag(cmd, "access-token")
-	organizationAPIKey, _ := flagutil.GetStringFlag(cmd, "organization-api-key")
-	var security operations.CollectSandboxTwinCredentialSecurity
-	if cmd.Flags().Changed("access-token") {
-		security.AccessToken = &accessToken
-	}
-	if cmd.Flags().Changed("organization-api-key") {
-		security.OrganizationAPIKey = &organizationAPIKey
 	}
 	if interactive.ShouldPrompt(cmd, credentialCmdMeta) {
 		if err := interactive.PromptAndSetFlags(cmd, credentialCmdMeta); err != nil {
@@ -76,7 +65,7 @@ func runCredentialCmd(cmd *cobra.Command, args []string) error {
 	if output.WantsRawJSON(cmd) {
 		sdkOpts = append(sdkOpts, operations.WithSkipDeserialization())
 	}
-	res, err := s.Sandboxes.Twins.Credential(cmd.Context(), security, *req, sdkOpts...)
+	res, err := s.Sandboxes.Twins.Credential(cmd.Context(), *req, sdkOpts...)
 	if err != nil {
 		return output.Error(cmd, err)
 	}

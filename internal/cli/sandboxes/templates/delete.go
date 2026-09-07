@@ -26,8 +26,6 @@ func initDeleteCmd(parent *cobra.Command) error {
 		Example: "  semva templates delete --template-id a20706ee-1743-41a5-b94e-257617129b0a",
 		RunE:    runDeleteCmd,
 	}
-	cmd.Flags().String("access-token", "", "Security credential")
-	cmd.Flags().String("organization-api-key", "", "Security credential")
 	flagutil.RegisterFlags(cmd, deleteCmdMeta)
 	if err := flagutil.ValidateMeta[operations.DeleteSandboxTemplateRequest](deleteCmdMeta); err != nil {
 		return fmt.Errorf("invalid metadata for delete: %w", err)
@@ -40,15 +38,6 @@ func initDeleteCmd(parent *cobra.Command) error {
 func runDeleteCmd(cmd *cobra.Command, args []string) error {
 	if usage.UsageRequested(cmd) {
 		return usage.EmitSchema(cmd, cmd.OutOrStdout())
-	}
-	accessToken, _ := flagutil.GetStringFlag(cmd, "access-token")
-	organizationAPIKey, _ := flagutil.GetStringFlag(cmd, "organization-api-key")
-	var security operations.DeleteSandboxTemplateSecurity
-	if cmd.Flags().Changed("access-token") {
-		security.AccessToken = &accessToken
-	}
-	if cmd.Flags().Changed("organization-api-key") {
-		security.OrganizationAPIKey = &organizationAPIKey
 	}
 	if interactive.ShouldPrompt(cmd, deleteCmdMeta) {
 		if err := interactive.PromptAndSetFlags(cmd, deleteCmdMeta); err != nil {
@@ -75,7 +64,7 @@ func runDeleteCmd(cmd *cobra.Command, args []string) error {
 	if output.WantsRawJSON(cmd) {
 		sdkOpts = append(sdkOpts, operations.WithSkipDeserialization())
 	}
-	res, err := s.Sandboxes.Templates.Delete(cmd.Context(), security, *req, sdkOpts...)
+	res, err := s.Sandboxes.Templates.Delete(cmd.Context(), *req, sdkOpts...)
 	if err != nil {
 		return output.Error(cmd, err)
 	}

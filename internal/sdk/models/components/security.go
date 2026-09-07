@@ -3,12 +3,12 @@
 package components
 
 type Security struct {
-	AccessToken *string `security:"scheme,type=http,subtype=bearer,name=Authorization"`
+	OrganizationAPIKey string `security:"scheme,type=apiKey,subtype=header,name=X-API-Key"`
 }
 
-func (s *Security) GetAccessToken() *string {
+func (s *Security) GetOrganizationAPIKey() string {
 	if s == nil {
-		return nil
+		return ""
 	}
-	return s.AccessToken
+	return s.OrganizationAPIKey
 }

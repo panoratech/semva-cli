@@ -33,7 +33,7 @@ func newOrganizations(rootSDK *Semva, sdkConfig config.SDKConfiguration, hooks *
 
 // ListOrganizations - List your organizations
 // Every organization the caller is a member of, with their role in each, oldest membership first. Independent of the organization the current token acts in. Paginated: walk the pages with `page` and `size`.
-func (s *Organizations) ListOrganizations(ctx context.Context, security operations.ListOrganizationsSecurity, request *operations.ListOrganizationsRequest, opts ...operations.Option) (*operations.ListOrganizationsResponse, error) {
+func (s *Organizations) ListOrganizations(ctx context.Context, request *operations.ListOrganizationsRequest, opts ...operations.Option) (*operations.ListOrganizationsResponse, error) {
 	o := operations.Options{}
 	supportedOptions := []string{
 		operations.SupportedOptionTimeout,
@@ -63,7 +63,7 @@ func (s *Organizations) ListOrganizations(ctx context.Context, security operatio
 		BaseURL:          baseURL,
 		Context:          ctx,
 		OperationID:      "list_organizations",
-		SecuritySource:   utils.AsSecuritySource(security),
+		SecuritySource:   s.sdkConfiguration.Security,
 	}
 
 	timeout := o.Timeout
@@ -95,7 +95,7 @@ func (s *Organizations) ListOrganizations(ctx context.Context, security operatio
 		return nil, fmt.Errorf("error populating query params: %w", err)
 	}
 
-	if err := utils.PopulateSecurity(ctx, req, utils.AsSecuritySource(security)); err != nil {
+	if err := utils.PopulateSecurity(ctx, req, s.sdkConfiguration.Security); err != nil {
 		return nil, err
 	}
 
@@ -219,7 +219,7 @@ func (s *Organizations) ListOrganizations(ctx context.Context, security operatio
 
 // CreateOrganization - Create an organization
 // Creates the organization in WorkOS with the caller as an admin, then mirrors it locally. The caller's current token is unchanged; refresh the AuthKit session into the new organization to act inside it.
-func (s *Organizations) CreateOrganization(ctx context.Context, security operations.CreateOrganizationSecurity, request components.CreateOrganizationRequest, opts ...operations.Option) (*operations.CreateOrganizationResponse, error) {
+func (s *Organizations) CreateOrganization(ctx context.Context, request components.CreateOrganizationRequest, opts ...operations.Option) (*operations.CreateOrganizationResponse, error) {
 	o := operations.Options{}
 	supportedOptions := []string{
 		operations.SupportedOptionTimeout,
@@ -249,7 +249,7 @@ func (s *Organizations) CreateOrganization(ctx context.Context, security operati
 		BaseURL:          baseURL,
 		Context:          ctx,
 		OperationID:      "create_organization",
-		SecuritySource:   utils.AsSecuritySource(security),
+		SecuritySource:   s.sdkConfiguration.Security,
 	}
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request, false, false, "Request", "json", `request:"mediaType=application/json"`)
 	if err != nil {
@@ -284,7 +284,7 @@ func (s *Organizations) CreateOrganization(ctx context.Context, security operati
 		req.Header.Set("Content-Type", reqContentType)
 	}
 
-	if err := utils.PopulateSecurity(ctx, req, utils.AsSecuritySource(security)); err != nil {
+	if err := utils.PopulateSecurity(ctx, req, s.sdkConfiguration.Security); err != nil {
 		return nil, err
 	}
 
@@ -408,7 +408,7 @@ func (s *Organizations) CreateOrganization(ctx context.Context, security operati
 
 // EnsureDefaultOrganization - Create your first organization
 // Idempotent: answers with the caller's oldest organization when they already belong to one, and otherwise creates one named after them, with the caller as an admin. This is what signing up calls, so that onboarding never has to ask for a name. Refresh the AuthKit session into the organization to act inside it.
-func (s *Organizations) EnsureDefaultOrganization(ctx context.Context, security operations.EnsureDefaultOrganizationSecurity, opts ...operations.Option) (*operations.EnsureDefaultOrganizationResponse, error) {
+func (s *Organizations) EnsureDefaultOrganization(ctx context.Context, opts ...operations.Option) (*operations.EnsureDefaultOrganizationResponse, error) {
 	o := operations.Options{}
 	supportedOptions := []string{
 		operations.SupportedOptionTimeout,
@@ -438,7 +438,7 @@ func (s *Organizations) EnsureDefaultOrganization(ctx context.Context, security 
 		BaseURL:          baseURL,
 		Context:          ctx,
 		OperationID:      "ensure_default_organization",
-		SecuritySource:   utils.AsSecuritySource(security),
+		SecuritySource:   s.sdkConfiguration.Security,
 	}
 
 	timeout := o.Timeout
@@ -466,7 +466,7 @@ func (s *Organizations) EnsureDefaultOrganization(ctx context.Context, security 
 	req.Header.Set("Accept", "application/json")
 	req.Header.Set("User-Agent", s.sdkConfiguration.UserAgent)
 
-	if err := utils.PopulateSecurity(ctx, req, utils.AsSecuritySource(security)); err != nil {
+	if err := utils.PopulateSecurity(ctx, req, s.sdkConfiguration.Security); err != nil {
 		return nil, err
 	}
 
@@ -565,7 +565,7 @@ func (s *Organizations) EnsureDefaultOrganization(ctx context.Context, security 
 
 // ReadCurrentOrganization - Read the active organization
 // The organization the access token acts in, plus the caller's role in it. Fails with 403 when the token names no organization.
-func (s *Organizations) ReadCurrentOrganization(ctx context.Context, security operations.ReadCurrentOrganizationSecurity, opts ...operations.Option) (*operations.ReadCurrentOrganizationResponse, error) {
+func (s *Organizations) ReadCurrentOrganization(ctx context.Context, opts ...operations.Option) (*operations.ReadCurrentOrganizationResponse, error) {
 	o := operations.Options{}
 	supportedOptions := []string{
 		operations.SupportedOptionTimeout,
@@ -595,7 +595,7 @@ func (s *Organizations) ReadCurrentOrganization(ctx context.Context, security op
 		BaseURL:          baseURL,
 		Context:          ctx,
 		OperationID:      "read_current_organization",
-		SecuritySource:   utils.AsSecuritySource(security),
+		SecuritySource:   s.sdkConfiguration.Security,
 	}
 
 	timeout := o.Timeout
@@ -623,7 +623,7 @@ func (s *Organizations) ReadCurrentOrganization(ctx context.Context, security op
 	req.Header.Set("Accept", "application/json")
 	req.Header.Set("User-Agent", s.sdkConfiguration.UserAgent)
 
-	if err := utils.PopulateSecurity(ctx, req, utils.AsSecuritySource(security)); err != nil {
+	if err := utils.PopulateSecurity(ctx, req, s.sdkConfiguration.Security); err != nil {
 		return nil, err
 	}
 
@@ -724,7 +724,7 @@ func (s *Organizations) ReadCurrentOrganization(ctx context.Context, security op
 
 // RenameCurrentOrganization - Rename the active organization
 // Requires the **admin** role or above in the active organization.
-func (s *Organizations) RenameCurrentOrganization(ctx context.Context, security operations.RenameCurrentOrganizationSecurity, request components.UpdateOrganizationRequest, opts ...operations.Option) (*operations.RenameCurrentOrganizationResponse, error) {
+func (s *Organizations) RenameCurrentOrganization(ctx context.Context, request components.UpdateOrganizationRequest, opts ...operations.Option) (*operations.RenameCurrentOrganizationResponse, error) {
 	o := operations.Options{}
 	supportedOptions := []string{
 		operations.SupportedOptionTimeout,
@@ -754,7 +754,7 @@ func (s *Organizations) RenameCurrentOrganization(ctx context.Context, security 
 		BaseURL:          baseURL,
 		Context:          ctx,
 		OperationID:      "rename_current_organization",
-		SecuritySource:   utils.AsSecuritySource(security),
+		SecuritySource:   s.sdkConfiguration.Security,
 	}
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request, false, false, "Request", "json", `request:"mediaType=application/json"`)
 	if err != nil {
@@ -789,7 +789,7 @@ func (s *Organizations) RenameCurrentOrganization(ctx context.Context, security 
 		req.Header.Set("Content-Type", reqContentType)
 	}
 
-	if err := utils.PopulateSecurity(ctx, req, utils.AsSecuritySource(security)); err != nil {
+	if err := utils.PopulateSecurity(ctx, req, s.sdkConfiguration.Security); err != nil {
 		return nil, err
 	}
 

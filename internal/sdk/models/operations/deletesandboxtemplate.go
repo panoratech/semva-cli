@@ -6,25 +6,6 @@ import (
 	"github.com/panoratech/semva-cli/internal/sdk/models/components"
 )
 
-type DeleteSandboxTemplateSecurity struct {
-	AccessToken        *string `security:"scheme,type=http,subtype=bearer,name=Authorization"`
-	OrganizationAPIKey *string `security:"scheme,type=apiKey,subtype=header,name=X-API-Key"`
-}
-
-func (d *DeleteSandboxTemplateSecurity) GetAccessToken() *string {
-	if d == nil {
-		return nil
-	}
-	return d.AccessToken
-}
-
-func (d *DeleteSandboxTemplateSecurity) GetOrganizationAPIKey() *string {
-	if d == nil {
-		return nil
-	}
-	return d.OrganizationAPIKey
-}
-
 type DeleteSandboxTemplateRequest struct {
 	TemplateID string `pathParam:"style=simple,explode=false,name=template_id"`
 }

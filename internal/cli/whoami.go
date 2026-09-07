@@ -44,10 +44,10 @@ func runWhoamiCmd(cmd *cobra.Command, args []string) error {
 	fmt.Fprintln(out)
 	fmt.Fprintln(out, "Credentials:")
 
-	// Access token issued by WorkOS AuthKit.
+	// An organization API key, as minted by `POST /organizations/current/api-keys`.
 	{
-		value, source := config.ResolveSecurityCredential(cmd, "access-token")
-		fmt.Fprintf(out, "  --%-25s [%-7s] %s\n", "access-token", source, maskSecret(value))
+		value, source := config.ResolveSecurityCredential(cmd, "organization-api-key")
+		fmt.Fprintf(out, "  --%-25s [%-7s] %s\n", "organization-api-key", source, maskSecret(value))
 	}
 
 	return nil

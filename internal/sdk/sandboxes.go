@@ -39,7 +39,7 @@ func newSandboxes(rootSDK *Semva, sdkConfig config.SDKConfiguration, hooks *hook
 }
 
 // List sandboxes
-func (s *Sandboxes) List(ctx context.Context, security operations.ListSandboxesSecurity, opts ...operations.Option) (*operations.ListSandboxesResponse, error) {
+func (s *Sandboxes) List(ctx context.Context, opts ...operations.Option) (*operations.ListSandboxesResponse, error) {
 	o := operations.Options{}
 	supportedOptions := []string{
 		operations.SupportedOptionTimeout,
@@ -69,7 +69,7 @@ func (s *Sandboxes) List(ctx context.Context, security operations.ListSandboxesS
 		BaseURL:          baseURL,
 		Context:          ctx,
 		OperationID:      "list_sandboxes",
-		SecuritySource:   utils.AsSecuritySource(security),
+		SecuritySource:   s.sdkConfiguration.Security,
 	}
 
 	timeout := o.Timeout
@@ -97,7 +97,7 @@ func (s *Sandboxes) List(ctx context.Context, security operations.ListSandboxesS
 	req.Header.Set("Accept", "application/json")
 	req.Header.Set("User-Agent", s.sdkConfiguration.UserAgent)
 
-	if err := utils.PopulateSecurity(ctx, req, utils.AsSecuritySource(security)); err != nil {
+	if err := utils.PopulateSecurity(ctx, req, s.sdkConfiguration.Security); err != nil {
 		return nil, err
 	}
 
@@ -198,7 +198,7 @@ func (s *Sandboxes) List(ctx context.Context, security operations.ListSandboxesS
 
 // Create a sandbox
 // Records the sandbox and queues each twin for provisioning. The twins are not serving yet: poll the sandbox until each reports `ready`, then collect its API key.
-func (s *Sandboxes) Create(ctx context.Context, security operations.CreateSandboxSecurity, request components.CreateSandboxRequest, opts ...operations.Option) (*operations.CreateSandboxResponse, error) {
+func (s *Sandboxes) Create(ctx context.Context, request components.CreateSandboxRequest, opts ...operations.Option) (*operations.CreateSandboxResponse, error) {
 	o := operations.Options{}
 	supportedOptions := []string{
 		operations.SupportedOptionTimeout,
@@ -228,7 +228,7 @@ func (s *Sandboxes) Create(ctx context.Context, security operations.CreateSandbo
 		BaseURL:          baseURL,
 		Context:          ctx,
 		OperationID:      "create_sandbox",
-		SecuritySource:   utils.AsSecuritySource(security),
+		SecuritySource:   s.sdkConfiguration.Security,
 	}
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request, false, false, "Request", "json", `request:"mediaType=application/json"`)
 	if err != nil {
@@ -263,7 +263,7 @@ func (s *Sandboxes) Create(ctx context.Context, security operations.CreateSandbo
 		req.Header.Set("Content-Type", reqContentType)
 	}
 
-	if err := utils.PopulateSecurity(ctx, req, utils.AsSecuritySource(security)); err != nil {
+	if err := utils.PopulateSecurity(ctx, req, s.sdkConfiguration.Security); err != nil {
 		return nil, err
 	}
 
@@ -388,7 +388,7 @@ func (s *Sandboxes) Create(ctx context.Context, security operations.CreateSandbo
 }
 
 // Get - Retrieve a sandbox
-func (s *Sandboxes) Get(ctx context.Context, security operations.GetSandboxSecurity, request operations.GetSandboxRequest, opts ...operations.Option) (*operations.GetSandboxResponse, error) {
+func (s *Sandboxes) Get(ctx context.Context, request operations.GetSandboxRequest, opts ...operations.Option) (*operations.GetSandboxResponse, error) {
 	o := operations.Options{}
 	supportedOptions := []string{
 		operations.SupportedOptionTimeout,
@@ -418,7 +418,7 @@ func (s *Sandboxes) Get(ctx context.Context, security operations.GetSandboxSecur
 		BaseURL:          baseURL,
 		Context:          ctx,
 		OperationID:      "get_sandbox",
-		SecuritySource:   utils.AsSecuritySource(security),
+		SecuritySource:   s.sdkConfiguration.Security,
 	}
 
 	timeout := o.Timeout
@@ -446,7 +446,7 @@ func (s *Sandboxes) Get(ctx context.Context, security operations.GetSandboxSecur
 	req.Header.Set("Accept", "application/json")
 	req.Header.Set("User-Agent", s.sdkConfiguration.UserAgent)
 
-	if err := utils.PopulateSecurity(ctx, req, utils.AsSecuritySource(security)); err != nil {
+	if err := utils.PopulateSecurity(ctx, req, s.sdkConfiguration.Security); err != nil {
 		return nil, err
 	}
 

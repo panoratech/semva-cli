@@ -27,8 +27,6 @@ func initGetCmd(parent *cobra.Command) error {
 		Example: "  semva logs get --sandbox-id a0fac35a-bd5d-41d3-a59e-2da4c1e8a360 --request-id 2fd11644-623b-4542-adf8-08c8674cb288",
 		RunE:    runGetCmd,
 	}
-	cmd.Flags().String("access-token", "", "Security credential")
-	cmd.Flags().String("organization-api-key", "", "Security credential")
 	flagutil.RegisterFlags(cmd, getCmdMeta)
 	if err := flagutil.ValidateMeta[operations.GetRequestLogRequest](getCmdMeta); err != nil {
 		return fmt.Errorf("invalid metadata for get: %w", err)
@@ -41,15 +39,6 @@ func initGetCmd(parent *cobra.Command) error {
 func runGetCmd(cmd *cobra.Command, args []string) error {
 	if usage.UsageRequested(cmd) {
 		return usage.EmitSchema(cmd, cmd.OutOrStdout())
-	}
-	accessToken, _ := flagutil.GetStringFlag(cmd, "access-token")
-	organizationAPIKey, _ := flagutil.GetStringFlag(cmd, "organization-api-key")
-	var security operations.GetRequestLogSecurity
-	if cmd.Flags().Changed("access-token") {
-		security.AccessToken = &accessToken
-	}
-	if cmd.Flags().Changed("organization-api-key") {
-		security.OrganizationAPIKey = &organizationAPIKey
 	}
 	if interactive.ShouldPrompt(cmd, getCmdMeta) {
 		if err := interactive.PromptAndSetFlags(cmd, getCmdMeta); err != nil {
@@ -76,7 +65,7 @@ func runGetCmd(cmd *cobra.Command, args []string) error {
 	if output.WantsRawJSON(cmd) {
 		sdkOpts = append(sdkOpts, operations.WithSkipDeserialization())
 	}
-	res, err := s.Sandboxes.Logs.Get(cmd.Context(), security, *req, sdkOpts...)
+	res, err := s.Sandboxes.Logs.Get(cmd.Context(), *req, sdkOpts...)
 	if err != nil {
 		return output.Error(cmd, err)
 	}

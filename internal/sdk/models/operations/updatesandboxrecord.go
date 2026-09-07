@@ -7,25 +7,6 @@ import (
 	"github.com/panoratech/semva-cli/internal/sdk/sdkinternal/utils"
 )
 
-type UpdateSandboxRecordSecurity struct {
-	AccessToken        *string `security:"scheme,type=http,subtype=bearer,name=Authorization"`
-	OrganizationAPIKey *string `security:"scheme,type=apiKey,subtype=header,name=X-API-Key"`
-}
-
-func (u *UpdateSandboxRecordSecurity) GetAccessToken() *string {
-	if u == nil {
-		return nil
-	}
-	return u.AccessToken
-}
-
-func (u *UpdateSandboxRecordSecurity) GetOrganizationAPIKey() *string {
-	if u == nil {
-		return nil
-	}
-	return u.OrganizationAPIKey
-}
-
 type UpdateSandboxRecordRequest struct {
 	SandboxID     string                                `pathParam:"style=simple,explode=false,name=sandbox_id"`
 	SandboxTwinID string                                `pathParam:"style=simple,explode=false,name=sandbox_twin_id"`

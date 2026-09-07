@@ -4,6 +4,8 @@ sources:
     Semva:
         inputs:
             - location: https://api.semva.dev/openapi.json
+        overlays:
+            - location: ./.speakeasy/api-key-only.yaml
         output: .speakeasy/out.openapi.yaml
         registry:
             location: registry.speakeasyapi.dev/panora-technologies-inc/semva/semva

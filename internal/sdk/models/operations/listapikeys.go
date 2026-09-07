@@ -7,25 +7,6 @@ import (
 	"github.com/panoratech/semva-cli/internal/sdk/sdkinternal/utils"
 )
 
-type ListAPIKeysSecurity struct {
-	AccessToken        *string `security:"scheme,type=http,subtype=bearer,name=Authorization"`
-	OrganizationAPIKey *string `security:"scheme,type=apiKey,subtype=header,name=X-API-Key"`
-}
-
-func (l *ListAPIKeysSecurity) GetAccessToken() *string {
-	if l == nil {
-		return nil
-	}
-	return l.AccessToken
-}
-
-func (l *ListAPIKeysSecurity) GetOrganizationAPIKey() *string {
-	if l == nil {
-		return nil
-	}
-	return l.OrganizationAPIKey
-}
-
 type ListAPIKeysRequest struct {
 	// Page number
 	Page *int64 `default:"1" queryParam:"style=form,explode=true,name=page"`

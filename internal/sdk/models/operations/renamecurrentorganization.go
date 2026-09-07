@@ -7,25 +7,6 @@ import (
 	"github.com/panoratech/semva-cli/internal/sdk/sdkinternal/utils"
 )
 
-type RenameCurrentOrganizationSecurity struct {
-	AccessToken        *string `security:"scheme,type=http,subtype=bearer,name=Authorization"`
-	OrganizationAPIKey *string `security:"scheme,type=apiKey,subtype=header,name=X-API-Key"`
-}
-
-func (r *RenameCurrentOrganizationSecurity) GetAccessToken() *string {
-	if r == nil {
-		return nil
-	}
-	return r.AccessToken
-}
-
-func (r *RenameCurrentOrganizationSecurity) GetOrganizationAPIKey() *string {
-	if r == nil {
-		return nil
-	}
-	return r.OrganizationAPIKey
-}
-
 type RenameCurrentOrganizationResponse struct {
 	HTTPMeta components.HTTPMetadata `json:"-"`
 	// The renamed organization and the caller's role in it

@@ -27,8 +27,6 @@ func initListApiKeysCmd(parent *cobra.Command) error {
 		Example: "  semva api-keys list",
 		RunE:    runListApiKeysCmd,
 	}
-	cmd.Flags().String("access-token", "", "Security credential")
-	cmd.Flags().String("organization-api-key", "", "Security credential")
 	flagutil.RegisterFlags(cmd, listAPIKeysCmdMeta)
 	if err := flagutil.ValidateMeta[operations.ListAPIKeysRequest](listAPIKeysCmdMeta); err != nil {
 		return fmt.Errorf("invalid metadata for list-api-keys: %w", err)
@@ -41,15 +39,6 @@ func initListApiKeysCmd(parent *cobra.Command) error {
 func runListApiKeysCmd(cmd *cobra.Command, args []string) error {
 	if usage.UsageRequested(cmd) {
 		return usage.EmitSchema(cmd, cmd.OutOrStdout())
-	}
-	accessToken, _ := flagutil.GetStringFlag(cmd, "access-token")
-	organizationAPIKey, _ := flagutil.GetStringFlag(cmd, "organization-api-key")
-	var security operations.ListAPIKeysSecurity
-	if cmd.Flags().Changed("access-token") {
-		security.AccessToken = &accessToken
-	}
-	if cmd.Flags().Changed("organization-api-key") {
-		security.OrganizationAPIKey = &organizationAPIKey
 	}
 	if interactive.ShouldPrompt(cmd, listAPIKeysCmdMeta) {
 		if err := interactive.PromptAndSetFlags(cmd, listAPIKeysCmdMeta); err != nil {
@@ -76,7 +65,7 @@ func runListApiKeysCmd(cmd *cobra.Command, args []string) error {
 	if output.WantsRawJSON(cmd) {
 		sdkOpts = append(sdkOpts, operations.WithSkipDeserialization())
 	}
-	res, err := s.APIKeys.ListAPIKeys(cmd.Context(), security, req, sdkOpts...)
+	res, err := s.APIKeys.ListAPIKeys(cmd.Context(), req, sdkOpts...)
 	if err != nil {
 		return output.Error(cmd, err)
 	}

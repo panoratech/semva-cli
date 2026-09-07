@@ -28,8 +28,6 @@ func initAdvanceCmd(parent *cobra.Command) error {
 		Example: "  semva sandboxes-twins advance --sandbox-id 0e5430b8-577a-40fb-a158-9fc5ad75ab04 --sandbox-twin-id 10a63cd8-60d5-4c91-bbd5-7c17aa12a3d7",
 		RunE:    runAdvanceCmd,
 	}
-	cmd.Flags().String("access-token", "", "Security credential")
-	cmd.Flags().String("organization-api-key", "", "Security credential")
 	flagutil.RegisterFlags(cmd, advanceCmdMeta)
 	if err := flagutil.ValidateMeta[operations.AdvanceSandboxRequest](advanceCmdMeta); err != nil {
 		return fmt.Errorf("invalid metadata for advance: %w", err)
@@ -43,15 +41,6 @@ func initAdvanceCmd(parent *cobra.Command) error {
 func runAdvanceCmd(cmd *cobra.Command, args []string) error {
 	if usage.UsageRequested(cmd) {
 		return usage.EmitSchema(cmd, cmd.OutOrStdout())
-	}
-	accessToken, _ := flagutil.GetStringFlag(cmd, "access-token")
-	organizationAPIKey, _ := flagutil.GetStringFlag(cmd, "organization-api-key")
-	var security operations.AdvanceSandboxSecurity
-	if cmd.Flags().Changed("access-token") {
-		security.AccessToken = &accessToken
-	}
-	if cmd.Flags().Changed("organization-api-key") {
-		security.OrganizationAPIKey = &organizationAPIKey
 	}
 	if interactive.ShouldPrompt(cmd, advanceCmdMeta) {
 		if err := interactive.PromptAndSetFlags(cmd, advanceCmdMeta); err != nil {
@@ -78,7 +67,7 @@ func runAdvanceCmd(cmd *cobra.Command, args []string) error {
 	if output.WantsRawJSON(cmd) {
 		sdkOpts = append(sdkOpts, operations.WithSkipDeserialization())
 	}
-	res, err := s.Sandboxes.Twins.Advance(cmd.Context(), security, *req, sdkOpts...)
+	res, err := s.Sandboxes.Twins.Advance(cmd.Context(), *req, sdkOpts...)
 	if err != nil {
 		return output.Error(cmd, err)
 	}

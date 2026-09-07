@@ -7,25 +7,6 @@ import (
 	"github.com/panoratech/semva-cli/internal/sdk/sdkinternal/utils"
 )
 
-type CreateAPIKeySecurity struct {
-	AccessToken        *string `security:"scheme,type=http,subtype=bearer,name=Authorization"`
-	OrganizationAPIKey *string `security:"scheme,type=apiKey,subtype=header,name=X-API-Key"`
-}
-
-func (c *CreateAPIKeySecurity) GetAccessToken() *string {
-	if c == nil {
-		return nil
-	}
-	return c.AccessToken
-}
-
-func (c *CreateAPIKeySecurity) GetOrganizationAPIKey() *string {
-	if c == nil {
-		return nil
-	}
-	return c.OrganizationAPIKey
-}
-
 type CreateAPIKeyResponse struct {
 	HTTPMeta components.HTTPMetadata `json:"-"`
 	// The new key, including its token

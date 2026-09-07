@@ -4,7 +4,6 @@ package organizations
 
 import (
 	"github.com/panoratech/semva-cli/internal/client"
-	"github.com/panoratech/semva-cli/internal/flagutil"
 	"github.com/panoratech/semva-cli/internal/output"
 	"github.com/panoratech/semva-cli/internal/sdk/models/operations"
 	"github.com/panoratech/semva-cli/internal/usage"
@@ -21,8 +20,6 @@ func initReadCurrentOrganizationCmd(parent *cobra.Command) error {
 		RunE:    runReadCurrentOrganizationCmd,
 		Aliases: []string{"rc"},
 	}
-	cmd.Flags().String("access-token", "", "Security credential")
-	cmd.Flags().String("organization-api-key", "", "Security credential")
 	parent.AddCommand(cmd)
 	return nil
 }
@@ -31,15 +28,6 @@ func initReadCurrentOrganizationCmd(parent *cobra.Command) error {
 func runReadCurrentOrganizationCmd(cmd *cobra.Command, args []string) error {
 	if usage.UsageRequested(cmd) {
 		return usage.EmitSchema(cmd, cmd.OutOrStdout())
-	}
-	accessToken, _ := flagutil.GetStringFlag(cmd, "access-token")
-	organizationAPIKey, _ := flagutil.GetStringFlag(cmd, "organization-api-key")
-	var security operations.ReadCurrentOrganizationSecurity
-	if cmd.Flags().Changed("access-token") {
-		security.AccessToken = &accessToken
-	}
-	if cmd.Flags().Changed("organization-api-key") {
-		security.OrganizationAPIKey = &organizationAPIKey
 	}
 	s, err := client.NewClient(cmd)
 	if err != nil {
@@ -57,7 +45,7 @@ func runReadCurrentOrganizationCmd(cmd *cobra.Command, args []string) error {
 	if output.WantsRawJSON(cmd) {
 		sdkOpts = append(sdkOpts, operations.WithSkipDeserialization())
 	}
-	res, err := s.Organizations.ReadCurrentOrganization(cmd.Context(), security, sdkOpts...)
+	res, err := s.Organizations.ReadCurrentOrganization(cmd.Context(), sdkOpts...)
 	if err != nil {
 		return output.Error(cmd, err)
 	}

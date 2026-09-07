@@ -21,11 +21,11 @@ func InitApiKeysRoot(parent *cobra.Command) error {
 		Aliases: []string{"ak"},
 	}
 
-	if err := initListApiKeysCmd(ApiKeysCmd); err != nil {
+	if err := initCreateApiKeyCmd(ApiKeysCmd); err != nil {
 		return err
 	}
 
-	if err := initCreateApiKeyCmd(ApiKeysCmd); err != nil {
+	if err := initListApiKeysCmd(ApiKeysCmd); err != nil {
 		return err
 	}
 

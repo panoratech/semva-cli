@@ -30,7 +30,7 @@ func newLogs(rootSDK *Semva, sdkConfig config.SDKConfiguration, hooks *hooks.Hoo
 }
 
 // List recent sandbox request logs
-func (s *Logs) List(ctx context.Context, security operations.ListRequestLogsSecurity, request operations.ListRequestLogsRequest, opts ...operations.Option) (*operations.ListRequestLogsResponse, error) {
+func (s *Logs) List(ctx context.Context, request operations.ListRequestLogsRequest, opts ...operations.Option) (*operations.ListRequestLogsResponse, error) {
 	o := operations.Options{}
 	supportedOptions := []string{
 		operations.SupportedOptionTimeout,
@@ -60,7 +60,7 @@ func (s *Logs) List(ctx context.Context, security operations.ListRequestLogsSecu
 		BaseURL:          baseURL,
 		Context:          ctx,
 		OperationID:      "list_request_logs",
-		SecuritySource:   utils.AsSecuritySource(security),
+		SecuritySource:   s.sdkConfiguration.Security,
 	}
 
 	timeout := o.Timeout
@@ -92,7 +92,7 @@ func (s *Logs) List(ctx context.Context, security operations.ListRequestLogsSecu
 		return nil, fmt.Errorf("error populating query params: %w", err)
 	}
 
-	if err := utils.PopulateSecurity(ctx, req, utils.AsSecuritySource(security)); err != nil {
+	if err := utils.PopulateSecurity(ctx, req, s.sdkConfiguration.Security); err != nil {
 		return nil, err
 	}
 
@@ -217,7 +217,7 @@ func (s *Logs) List(ctx context.Context, security operations.ListRequestLogsSecu
 }
 
 // Get - Retrieve a sandbox request log
-func (s *Logs) Get(ctx context.Context, security operations.GetRequestLogSecurity, request operations.GetRequestLogRequest, opts ...operations.Option) (*operations.GetRequestLogResponse, error) {
+func (s *Logs) Get(ctx context.Context, request operations.GetRequestLogRequest, opts ...operations.Option) (*operations.GetRequestLogResponse, error) {
 	o := operations.Options{}
 	supportedOptions := []string{
 		operations.SupportedOptionTimeout,
@@ -247,7 +247,7 @@ func (s *Logs) Get(ctx context.Context, security operations.GetRequestLogSecurit
 		BaseURL:          baseURL,
 		Context:          ctx,
 		OperationID:      "get_request_log",
-		SecuritySource:   utils.AsSecuritySource(security),
+		SecuritySource:   s.sdkConfiguration.Security,
 	}
 
 	timeout := o.Timeout
@@ -275,7 +275,7 @@ func (s *Logs) Get(ctx context.Context, security operations.GetRequestLogSecurit
 	req.Header.Set("Accept", "application/json")
 	req.Header.Set("User-Agent", s.sdkConfiguration.UserAgent)
 
-	if err := utils.PopulateSecurity(ctx, req, utils.AsSecuritySource(security)); err != nil {
+	if err := utils.PopulateSecurity(ctx, req, s.sdkConfiguration.Security); err != nil {
 		return nil, err
 	}
 

@@ -7,25 +7,6 @@ import (
 	"github.com/panoratech/semva-cli/internal/sdk/sdkinternal/utils"
 )
 
-type ReadCurrentOrganizationSecurity struct {
-	AccessToken        *string `security:"scheme,type=http,subtype=bearer,name=Authorization"`
-	OrganizationAPIKey *string `security:"scheme,type=apiKey,subtype=header,name=X-API-Key"`
-}
-
-func (r *ReadCurrentOrganizationSecurity) GetAccessToken() *string {
-	if r == nil {
-		return nil
-	}
-	return r.AccessToken
-}
-
-func (r *ReadCurrentOrganizationSecurity) GetOrganizationAPIKey() *string {
-	if r == nil {
-		return nil
-	}
-	return r.OrganizationAPIKey
-}
-
 type ReadCurrentOrganizationResponse struct {
 	HTTPMeta components.HTTPMetadata `json:"-"`
 	// The active organization and the caller's role in it

@@ -31,8 +31,6 @@ func initCreateCmd(parent *cobra.Command) error {
 		Example: "  semva sandboxes create --name <value>",
 		RunE:    runCreateCmd,
 	}
-	cmd.Flags().String("access-token", "", "Security credential")
-	cmd.Flags().String("organization-api-key", "", "Security credential")
 	flagutil.RegisterFlags(cmd, createCmdMeta)
 	if err := flagutil.ValidateMeta[components.CreateSandboxRequest](createCmdMeta); err != nil {
 		return fmt.Errorf("invalid metadata for create: %w", err)
@@ -46,15 +44,6 @@ func initCreateCmd(parent *cobra.Command) error {
 func runCreateCmd(cmd *cobra.Command, args []string) error {
 	if usage.UsageRequested(cmd) {
 		return usage.EmitSchema(cmd, cmd.OutOrStdout())
-	}
-	accessToken, _ := flagutil.GetStringFlag(cmd, "access-token")
-	organizationAPIKey, _ := flagutil.GetStringFlag(cmd, "organization-api-key")
-	var security operations.CreateSandboxSecurity
-	if cmd.Flags().Changed("access-token") {
-		security.AccessToken = &accessToken
-	}
-	if cmd.Flags().Changed("organization-api-key") {
-		security.OrganizationAPIKey = &organizationAPIKey
 	}
 	if interactive.ShouldPrompt(cmd, createCmdMeta) {
 		if err := interactive.PromptAndSetFlags(cmd, createCmdMeta); err != nil {
@@ -81,7 +70,7 @@ func runCreateCmd(cmd *cobra.Command, args []string) error {
 	if output.WantsRawJSON(cmd) {
 		sdkOpts = append(sdkOpts, operations.WithSkipDeserialization())
 	}
-	res, err := s.Sandboxes.Create(cmd.Context(), security, *request, sdkOpts...)
+	res, err := s.Sandboxes.Create(cmd.Context(), *request, sdkOpts...)
 	if err != nil {
 		return output.Error(cmd, err)
 	}

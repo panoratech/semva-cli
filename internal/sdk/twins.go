@@ -33,7 +33,7 @@ func newTwins(rootSDK *Semva, sdkConfig config.SDKConfiguration, hooks *hooks.Ho
 
 // ListTwins - List available twins
 // Returns the registered code twins ordered by display name.
-func (s *Twins) ListTwins(ctx context.Context, security operations.ListTwinsSecurity, request *operations.ListTwinsRequest, opts ...operations.Option) (*operations.ListTwinsResponse, error) {
+func (s *Twins) ListTwins(ctx context.Context, request *operations.ListTwinsRequest, opts ...operations.Option) (*operations.ListTwinsResponse, error) {
 	o := operations.Options{}
 	supportedOptions := []string{
 		operations.SupportedOptionTimeout,
@@ -63,7 +63,7 @@ func (s *Twins) ListTwins(ctx context.Context, security operations.ListTwinsSecu
 		BaseURL:          baseURL,
 		Context:          ctx,
 		OperationID:      "list_twins",
-		SecuritySource:   utils.AsSecuritySource(security),
+		SecuritySource:   s.sdkConfiguration.Security,
 	}
 
 	timeout := o.Timeout
@@ -95,7 +95,7 @@ func (s *Twins) ListTwins(ctx context.Context, security operations.ListTwinsSecu
 		return nil, fmt.Errorf("error populating query params: %w", err)
 	}
 
-	if err := utils.PopulateSecurity(ctx, req, utils.AsSecuritySource(security)); err != nil {
+	if err := utils.PopulateSecurity(ctx, req, s.sdkConfiguration.Security); err != nil {
 		return nil, err
 	}
 
@@ -220,7 +220,7 @@ func (s *Twins) ListTwins(ctx context.Context, security operations.ListTwinsSecu
 }
 
 // GetTwin - Retrieve a twin
-func (s *Twins) GetTwin(ctx context.Context, security operations.GetTwinSecurity, request operations.GetTwinRequest, opts ...operations.Option) (*operations.GetTwinResponse, error) {
+func (s *Twins) GetTwin(ctx context.Context, request operations.GetTwinRequest, opts ...operations.Option) (*operations.GetTwinResponse, error) {
 	o := operations.Options{}
 	supportedOptions := []string{
 		operations.SupportedOptionTimeout,
@@ -250,7 +250,7 @@ func (s *Twins) GetTwin(ctx context.Context, security operations.GetTwinSecurity
 		BaseURL:          baseURL,
 		Context:          ctx,
 		OperationID:      "get_twin",
-		SecuritySource:   utils.AsSecuritySource(security),
+		SecuritySource:   s.sdkConfiguration.Security,
 	}
 
 	timeout := o.Timeout
@@ -278,7 +278,7 @@ func (s *Twins) GetTwin(ctx context.Context, security operations.GetTwinSecurity
 	req.Header.Set("Accept", "application/json")
 	req.Header.Set("User-Agent", s.sdkConfiguration.UserAgent)
 
-	if err := utils.PopulateSecurity(ctx, req, utils.AsSecuritySource(security)); err != nil {
+	if err := utils.PopulateSecurity(ctx, req, s.sdkConfiguration.Security); err != nil {
 		return nil, err
 	}
 

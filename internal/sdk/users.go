@@ -33,7 +33,7 @@ func newUsers(rootSDK *Semva, sdkConfig config.SDKConfiguration, hooks *hooks.Ho
 
 // ReadMe - Read the authenticated user
 // Returns the caller, the organization their token acts in, and every organization they belong to with their role in each. A caller who has not joined an organization yet gets a null active organization, which is how the client knows to show onboarding.
-func (s *Users) ReadMe(ctx context.Context, security operations.ReadMeSecurity, opts ...operations.Option) (*operations.ReadMeResponse, error) {
+func (s *Users) ReadMe(ctx context.Context, opts ...operations.Option) (*operations.ReadMeResponse, error) {
 	o := operations.Options{}
 	supportedOptions := []string{
 		operations.SupportedOptionTimeout,
@@ -63,7 +63,7 @@ func (s *Users) ReadMe(ctx context.Context, security operations.ReadMeSecurity, 
 		BaseURL:          baseURL,
 		Context:          ctx,
 		OperationID:      "read_me",
-		SecuritySource:   utils.AsSecuritySource(security),
+		SecuritySource:   s.sdkConfiguration.Security,
 	}
 
 	timeout := o.Timeout
@@ -91,7 +91,7 @@ func (s *Users) ReadMe(ctx context.Context, security operations.ReadMeSecurity, 
 	req.Header.Set("Accept", "application/json")
 	req.Header.Set("User-Agent", s.sdkConfiguration.UserAgent)
 
-	if err := utils.PopulateSecurity(ctx, req, utils.AsSecuritySource(security)); err != nil {
+	if err := utils.PopulateSecurity(ctx, req, s.sdkConfiguration.Security); err != nil {
 		return nil, err
 	}
 

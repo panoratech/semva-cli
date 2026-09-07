@@ -6,25 +6,6 @@ import (
 	"github.com/panoratech/semva-cli/internal/sdk/models/components"
 )
 
-type RevokeAPIKeySecurity struct {
-	AccessToken        *string `security:"scheme,type=http,subtype=bearer,name=Authorization"`
-	OrganizationAPIKey *string `security:"scheme,type=apiKey,subtype=header,name=X-API-Key"`
-}
-
-func (r *RevokeAPIKeySecurity) GetAccessToken() *string {
-	if r == nil {
-		return nil
-	}
-	return r.AccessToken
-}
-
-func (r *RevokeAPIKeySecurity) GetOrganizationAPIKey() *string {
-	if r == nil {
-		return nil
-	}
-	return r.OrganizationAPIKey
-}
-
 type RevokeAPIKeyRequest struct {
 	APIKeyID string `pathParam:"style=simple,explode=false,name=api_key_id"`
 }

@@ -30,7 +30,7 @@ func newRecords(rootSDK *Semva, sdkConfig config.SDKConfiguration, hooks *hooks.
 }
 
 // List sandbox twin state
-func (s *Records) List(ctx context.Context, security operations.ListSandboxRecordsSecurity, request operations.ListSandboxRecordsRequest, opts ...operations.Option) (*operations.ListSandboxRecordsResponse, error) {
+func (s *Records) List(ctx context.Context, request operations.ListSandboxRecordsRequest, opts ...operations.Option) (*operations.ListSandboxRecordsResponse, error) {
 	o := operations.Options{}
 	supportedOptions := []string{
 		operations.SupportedOptionTimeout,
@@ -60,7 +60,7 @@ func (s *Records) List(ctx context.Context, security operations.ListSandboxRecor
 		BaseURL:          baseURL,
 		Context:          ctx,
 		OperationID:      "list_sandbox_records",
-		SecuritySource:   utils.AsSecuritySource(security),
+		SecuritySource:   s.sdkConfiguration.Security,
 	}
 
 	timeout := o.Timeout
@@ -88,7 +88,7 @@ func (s *Records) List(ctx context.Context, security operations.ListSandboxRecor
 	req.Header.Set("Accept", "application/json")
 	req.Header.Set("User-Agent", s.sdkConfiguration.UserAgent)
 
-	if err := utils.PopulateSecurity(ctx, req, utils.AsSecuritySource(security)); err != nil {
+	if err := utils.PopulateSecurity(ctx, req, s.sdkConfiguration.Security); err != nil {
 		return nil, err
 	}
 
@@ -213,7 +213,7 @@ func (s *Records) List(ctx context.Context, security operations.ListSandboxRecor
 }
 
 // Update - Replace a sandbox twin record
-func (s *Records) Update(ctx context.Context, security operations.UpdateSandboxRecordSecurity, request operations.UpdateSandboxRecordRequest, opts ...operations.Option) (*operations.UpdateSandboxRecordResponse, error) {
+func (s *Records) Update(ctx context.Context, request operations.UpdateSandboxRecordRequest, opts ...operations.Option) (*operations.UpdateSandboxRecordResponse, error) {
 	o := operations.Options{}
 	supportedOptions := []string{
 		operations.SupportedOptionTimeout,
@@ -243,7 +243,7 @@ func (s *Records) Update(ctx context.Context, security operations.UpdateSandboxR
 		BaseURL:          baseURL,
 		Context:          ctx,
 		OperationID:      "update_sandbox_record",
-		SecuritySource:   utils.AsSecuritySource(security),
+		SecuritySource:   s.sdkConfiguration.Security,
 	}
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request, false, false, "Body", "json", `request:"mediaType=application/json"`)
 	if err != nil {
@@ -278,7 +278,7 @@ func (s *Records) Update(ctx context.Context, security operations.UpdateSandboxR
 		req.Header.Set("Content-Type", reqContentType)
 	}
 
-	if err := utils.PopulateSecurity(ctx, req, utils.AsSecuritySource(security)); err != nil {
+	if err := utils.PopulateSecurity(ctx, req, s.sdkConfiguration.Security); err != nil {
 		return nil, err
 	}
 

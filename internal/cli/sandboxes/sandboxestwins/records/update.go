@@ -30,8 +30,6 @@ func initUpdateCmd(parent *cobra.Command) error {
 		Example: "  semva records update --sandbox-id cf2a2465-9cde-4d4d-8896-6719d664c50d --sandbox-twin-id 76434c10-cd55-40e4-b5ac-f1ae38f16ed9 --resource <value> --external-id <id> --body-param '{\"key\":\"<value>\"}'",
 		RunE:    runUpdateCmd,
 	}
-	cmd.Flags().String("access-token", "", "Security credential")
-	cmd.Flags().String("organization-api-key", "", "Security credential")
 	flagutil.RegisterFlags(cmd, updateCmdMeta)
 	if err := flagutil.ValidateMeta[operations.UpdateSandboxRecordRequest](updateCmdMeta); err != nil {
 		return fmt.Errorf("invalid metadata for update: %w", err)
@@ -45,15 +43,6 @@ func initUpdateCmd(parent *cobra.Command) error {
 func runUpdateCmd(cmd *cobra.Command, args []string) error {
 	if usage.UsageRequested(cmd) {
 		return usage.EmitSchema(cmd, cmd.OutOrStdout())
-	}
-	accessToken, _ := flagutil.GetStringFlag(cmd, "access-token")
-	organizationAPIKey, _ := flagutil.GetStringFlag(cmd, "organization-api-key")
-	var security operations.UpdateSandboxRecordSecurity
-	if cmd.Flags().Changed("access-token") {
-		security.AccessToken = &accessToken
-	}
-	if cmd.Flags().Changed("organization-api-key") {
-		security.OrganizationAPIKey = &organizationAPIKey
 	}
 	if interactive.ShouldPrompt(cmd, updateCmdMeta) {
 		if err := interactive.PromptAndSetFlags(cmd, updateCmdMeta); err != nil {
@@ -80,7 +69,7 @@ func runUpdateCmd(cmd *cobra.Command, args []string) error {
 	if output.WantsRawJSON(cmd) {
 		sdkOpts = append(sdkOpts, operations.WithSkipDeserialization())
 	}
-	res, err := s.Sandboxes.Twins.Records.Update(cmd.Context(), security, *req, sdkOpts...)
+	res, err := s.Sandboxes.Twins.Records.Update(cmd.Context(), *req, sdkOpts...)
 	if err != nil {
 		return output.Error(cmd, err)
 	}

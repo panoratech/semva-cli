@@ -7,25 +7,6 @@ import (
 	"github.com/panoratech/semva-cli/internal/sdk/sdkinternal/utils"
 )
 
-type StopSandboxTwinSecurity struct {
-	AccessToken        *string `security:"scheme,type=http,subtype=bearer,name=Authorization"`
-	OrganizationAPIKey *string `security:"scheme,type=apiKey,subtype=header,name=X-API-Key"`
-}
-
-func (s *StopSandboxTwinSecurity) GetAccessToken() *string {
-	if s == nil {
-		return nil
-	}
-	return s.AccessToken
-}
-
-func (s *StopSandboxTwinSecurity) GetOrganizationAPIKey() *string {
-	if s == nil {
-		return nil
-	}
-	return s.OrganizationAPIKey
-}
-
 type StopSandboxTwinRequest struct {
 	SandboxID     string `pathParam:"style=simple,explode=false,name=sandbox_id"`
 	SandboxTwinID string `pathParam:"style=simple,explode=false,name=sandbox_twin_id"`

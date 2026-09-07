@@ -1,0 +1,13 @@
+overlay: 1.0.0
+info:
+  title: API keys only
+  version: 0.0.1
+actions:
+  # The API accepts either a WorkOS access token or an organization API key. A
+  # browser can get the former; a terminal cannot, so the CLI only offers keys.
+  - target: $.paths.*.*.security[0]
+    description: Drop the WorkOS access token option from every operation.
+    remove: true
+  - target: $.components.securitySchemes['Access token']
+    description: Drop the now-unreferenced access token scheme.
+    remove: true

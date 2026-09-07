@@ -92,9 +92,9 @@ func runAuthLoginCmd(cmd *cobra.Command, args []string) error {
 	if noInteractive, _ := cmd.Flags().GetBool("no-interactive"); noInteractive {
 		// Non-interactive: store any explicitly-set flags without prompting
 		changed := false
-		if f := cmd.Flags().Lookup("access-token"); f != nil && f.Changed {
-			v, _ := cmd.Flags().GetString("access-token")
-			if config.StoreSecret("access-token", v, &cfg.Security.AccessToken) == nil {
+		if f := cmd.Flags().Lookup("organization-api-key"); f != nil && f.Changed {
+			v, _ := cmd.Flags().GetString("organization-api-key")
+			if config.StoreSecret("organization-api-key", v, &cfg.Security.OrganizationAPIKey) == nil {
 				keychainStored = true
 			}
 			changed = true
@@ -105,17 +105,17 @@ func runAuthLoginCmd(cmd *cobra.Command, args []string) error {
 		}
 	} else {
 
-		var authAccessToken string
+		var authOrganizationAPIKey string
 
 		accessible := !authIsInteractive(cmd)
 
 		fields := []huh.Field{
 			huh.NewInput().
-				Title("Access token issued by WorkOS AuthKit.").
-				Description("--access-token").
+				Title("An organization API key, as minted by `POST /organizations/current/api-keys`.").
+				Description("--organization-api-key").
 				EchoMode(huh.EchoModePassword).
-				Placeholder(maskSecret(config.GetStoredSecret("access-token", cfg.Security.AccessToken))).
-				Value(&authAccessToken),
+				Placeholder(maskSecret(config.GetStoredSecret("organization-api-key", cfg.Security.OrganizationAPIKey))).
+				Value(&authOrganizationAPIKey),
 		}
 
 		form := huh.NewForm(huh.NewGroup(fields...)).
@@ -128,8 +128,8 @@ func runAuthLoginCmd(cmd *cobra.Command, args []string) error {
 			return fmt.Errorf("auth login: %w", err)
 		}
 
-		if authAccessToken != "" {
-			if config.StoreSecret("access-token", authAccessToken, &cfg.Security.AccessToken) == nil {
+		if authOrganizationAPIKey != "" {
+			if config.StoreSecret("organization-api-key", authOrganizationAPIKey, &cfg.Security.OrganizationAPIKey) == nil {
 				keychainStored = true
 			}
 		}
@@ -156,9 +156,9 @@ func runAuthLogoutCmd(cmd *cobra.Command, args []string) error {
 	}
 
 	if config.KeyringAvailable() {
-		_ = config.DeleteKeyringValue("access-token")
+		_ = config.DeleteKeyringValue("organization-api-key")
 	}
-	cfg.Security.AccessToken = ""
+	cfg.Security.OrganizationAPIKey = ""
 
 	if err := config.SaveConfig(cfg); err != nil {
 		return fmt.Errorf("failed to save configuration: %w", err)

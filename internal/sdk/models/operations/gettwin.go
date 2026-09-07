@@ -7,25 +7,6 @@ import (
 	"github.com/panoratech/semva-cli/internal/sdk/sdkinternal/utils"
 )
 
-type GetTwinSecurity struct {
-	AccessToken        *string `security:"scheme,type=http,subtype=bearer,name=Authorization"`
-	OrganizationAPIKey *string `security:"scheme,type=apiKey,subtype=header,name=X-API-Key"`
-}
-
-func (g *GetTwinSecurity) GetAccessToken() *string {
-	if g == nil {
-		return nil
-	}
-	return g.AccessToken
-}
-
-func (g *GetTwinSecurity) GetOrganizationAPIKey() *string {
-	if g == nil {
-		return nil
-	}
-	return g.OrganizationAPIKey
-}
-
 type GetTwinRequest struct {
 	TwinSlug string `pathParam:"style=simple,explode=false,name=twin_slug"`
 }

@@ -27,8 +27,6 @@ func initCreateOrganizationCmd(parent *cobra.Command) error {
 		Example: "  semva organizations create --name <value>",
 		RunE:    runCreateOrganizationCmd,
 	}
-	cmd.Flags().String("access-token", "", "Security credential")
-	cmd.Flags().String("organization-api-key", "", "Security credential")
 	flagutil.RegisterFlags(cmd, createOrganizationCmdMeta)
 	if err := flagutil.ValidateMeta[components.CreateOrganizationRequest](createOrganizationCmdMeta); err != nil {
 		return fmt.Errorf("invalid metadata for create-organization: %w", err)
@@ -42,15 +40,6 @@ func initCreateOrganizationCmd(parent *cobra.Command) error {
 func runCreateOrganizationCmd(cmd *cobra.Command, args []string) error {
 	if usage.UsageRequested(cmd) {
 		return usage.EmitSchema(cmd, cmd.OutOrStdout())
-	}
-	accessToken, _ := flagutil.GetStringFlag(cmd, "access-token")
-	organizationAPIKey, _ := flagutil.GetStringFlag(cmd, "organization-api-key")
-	var security operations.CreateOrganizationSecurity
-	if cmd.Flags().Changed("access-token") {
-		security.AccessToken = &accessToken
-	}
-	if cmd.Flags().Changed("organization-api-key") {
-		security.OrganizationAPIKey = &organizationAPIKey
 	}
 	if interactive.ShouldPrompt(cmd, createOrganizationCmdMeta) {
 		if err := interactive.PromptAndSetFlags(cmd, createOrganizationCmdMeta); err != nil {
@@ -77,7 +66,7 @@ func runCreateOrganizationCmd(cmd *cobra.Command, args []string) error {
 	if output.WantsRawJSON(cmd) {
 		sdkOpts = append(sdkOpts, operations.WithSkipDeserialization())
 	}
-	res, err := s.Organizations.CreateOrganization(cmd.Context(), security, *request, sdkOpts...)
+	res, err := s.Organizations.CreateOrganization(cmd.Context(), *request, sdkOpts...)
 	if err != nil {
 		return output.Error(cmd, err)
 	}

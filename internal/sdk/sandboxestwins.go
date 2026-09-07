@@ -34,7 +34,7 @@ func newSandboxesTwins(rootSDK *Semva, sdkConfig config.SDKConfiguration, hooks 
 
 // Start a sandbox twin
 // Queues a fresh container. Its state and credentials are new.
-func (s *SandboxesTwins) Start(ctx context.Context, security operations.StartSandboxTwinSecurity, request operations.StartSandboxTwinRequest, opts ...operations.Option) (*operations.StartSandboxTwinResponse, error) {
+func (s *SandboxesTwins) Start(ctx context.Context, request operations.StartSandboxTwinRequest, opts ...operations.Option) (*operations.StartSandboxTwinResponse, error) {
 	o := operations.Options{}
 	supportedOptions := []string{
 		operations.SupportedOptionTimeout,
@@ -64,7 +64,7 @@ func (s *SandboxesTwins) Start(ctx context.Context, security operations.StartSan
 		BaseURL:          baseURL,
 		Context:          ctx,
 		OperationID:      "start_sandbox_twin",
-		SecuritySource:   utils.AsSecuritySource(security),
+		SecuritySource:   s.sdkConfiguration.Security,
 	}
 
 	timeout := o.Timeout
@@ -92,7 +92,7 @@ func (s *SandboxesTwins) Start(ctx context.Context, security operations.StartSan
 	req.Header.Set("Accept", "application/json")
 	req.Header.Set("User-Agent", s.sdkConfiguration.UserAgent)
 
-	if err := utils.PopulateSecurity(ctx, req, utils.AsSecuritySource(security)); err != nil {
+	if err := utils.PopulateSecurity(ctx, req, s.sdkConfiguration.Security); err != nil {
 		return nil, err
 	}
 
@@ -218,7 +218,7 @@ func (s *SandboxesTwins) Start(ctx context.Context, security operations.StartSan
 
 // Stop a sandbox twin
 // Queues the container for destruction. Everything it holds is lost.
-func (s *SandboxesTwins) Stop(ctx context.Context, security operations.StopSandboxTwinSecurity, request operations.StopSandboxTwinRequest, opts ...operations.Option) (*operations.StopSandboxTwinResponse, error) {
+func (s *SandboxesTwins) Stop(ctx context.Context, request operations.StopSandboxTwinRequest, opts ...operations.Option) (*operations.StopSandboxTwinResponse, error) {
 	o := operations.Options{}
 	supportedOptions := []string{
 		operations.SupportedOptionTimeout,
@@ -248,7 +248,7 @@ func (s *SandboxesTwins) Stop(ctx context.Context, security operations.StopSandb
 		BaseURL:          baseURL,
 		Context:          ctx,
 		OperationID:      "stop_sandbox_twin",
-		SecuritySource:   utils.AsSecuritySource(security),
+		SecuritySource:   s.sdkConfiguration.Security,
 	}
 
 	timeout := o.Timeout
@@ -276,7 +276,7 @@ func (s *SandboxesTwins) Stop(ctx context.Context, security operations.StopSandb
 	req.Header.Set("Accept", "application/json")
 	req.Header.Set("User-Agent", s.sdkConfiguration.UserAgent)
 
-	if err := utils.PopulateSecurity(ctx, req, utils.AsSecuritySource(security)); err != nil {
+	if err := utils.PopulateSecurity(ctx, req, s.sdkConfiguration.Security); err != nil {
 		return nil, err
 	}
 
@@ -402,7 +402,7 @@ func (s *SandboxesTwins) Stop(ctx context.Context, security operations.StopSandb
 
 // Credential - Collect the twin's API key
 // Returns the key once. A second call is refused.
-func (s *SandboxesTwins) Credential(ctx context.Context, security operations.CollectSandboxTwinCredentialSecurity, request operations.CollectSandboxTwinCredentialRequest, opts ...operations.Option) (*operations.CollectSandboxTwinCredentialResponse, error) {
+func (s *SandboxesTwins) Credential(ctx context.Context, request operations.CollectSandboxTwinCredentialRequest, opts ...operations.Option) (*operations.CollectSandboxTwinCredentialResponse, error) {
 	o := operations.Options{}
 	supportedOptions := []string{
 		operations.SupportedOptionTimeout,
@@ -432,7 +432,7 @@ func (s *SandboxesTwins) Credential(ctx context.Context, security operations.Col
 		BaseURL:          baseURL,
 		Context:          ctx,
 		OperationID:      "collect_sandbox_twin_credential",
-		SecuritySource:   utils.AsSecuritySource(security),
+		SecuritySource:   s.sdkConfiguration.Security,
 	}
 
 	timeout := o.Timeout
@@ -460,7 +460,7 @@ func (s *SandboxesTwins) Credential(ctx context.Context, security operations.Col
 	req.Header.Set("Accept", "application/json")
 	req.Header.Set("User-Agent", s.sdkConfiguration.UserAgent)
 
-	if err := utils.PopulateSecurity(ctx, req, utils.AsSecuritySource(security)); err != nil {
+	if err := utils.PopulateSecurity(ctx, req, s.sdkConfiguration.Security); err != nil {
 		return nil, err
 	}
 
@@ -585,7 +585,7 @@ func (s *SandboxesTwins) Credential(ctx context.Context, security operations.Col
 }
 
 // Advance a deterministic twin lifecycle
-func (s *SandboxesTwins) Advance(ctx context.Context, security operations.AdvanceSandboxSecurity, request operations.AdvanceSandboxRequest, opts ...operations.Option) (*operations.AdvanceSandboxResponse, error) {
+func (s *SandboxesTwins) Advance(ctx context.Context, request operations.AdvanceSandboxRequest, opts ...operations.Option) (*operations.AdvanceSandboxResponse, error) {
 	o := operations.Options{}
 	supportedOptions := []string{
 		operations.SupportedOptionTimeout,
@@ -615,7 +615,7 @@ func (s *SandboxesTwins) Advance(ctx context.Context, security operations.Advanc
 		BaseURL:          baseURL,
 		Context:          ctx,
 		OperationID:      "advance_sandbox",
-		SecuritySource:   utils.AsSecuritySource(security),
+		SecuritySource:   s.sdkConfiguration.Security,
 	}
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request, false, false, "Body", "json", `request:"mediaType=application/json"`)
 	if err != nil {
@@ -650,7 +650,7 @@ func (s *SandboxesTwins) Advance(ctx context.Context, security operations.Advanc
 		req.Header.Set("Content-Type", reqContentType)
 	}
 
-	if err := utils.PopulateSecurity(ctx, req, utils.AsSecuritySource(security)); err != nil {
+	if err := utils.PopulateSecurity(ctx, req, s.sdkConfiguration.Security); err != nil {
 		return nil, err
 	}
 

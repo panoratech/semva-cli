@@ -26,8 +26,6 @@ func initRevokeApiKeyCmd(parent *cobra.Command) error {
 		Example: "  semva api-keys revoke --api-key-id 70d05b12-db01-4e93-afb7-c26ecf254345",
 		RunE:    runRevokeApiKeyCmd,
 	}
-	cmd.Flags().String("access-token", "", "Security credential")
-	cmd.Flags().String("organization-api-key", "", "Security credential")
 	flagutil.RegisterFlags(cmd, revokeAPIKeyCmdMeta)
 	if err := flagutil.ValidateMeta[operations.RevokeAPIKeyRequest](revokeAPIKeyCmdMeta); err != nil {
 		return fmt.Errorf("invalid metadata for revoke-api-key: %w", err)
@@ -40,15 +38,6 @@ func initRevokeApiKeyCmd(parent *cobra.Command) error {
 func runRevokeApiKeyCmd(cmd *cobra.Command, args []string) error {
 	if usage.UsageRequested(cmd) {
 		return usage.EmitSchema(cmd, cmd.OutOrStdout())
-	}
-	accessToken, _ := flagutil.GetStringFlag(cmd, "access-token")
-	organizationAPIKey, _ := flagutil.GetStringFlag(cmd, "organization-api-key")
-	var security operations.RevokeAPIKeySecurity
-	if cmd.Flags().Changed("access-token") {
-		security.AccessToken = &accessToken
-	}
-	if cmd.Flags().Changed("organization-api-key") {
-		security.OrganizationAPIKey = &organizationAPIKey
 	}
 	if interactive.ShouldPrompt(cmd, revokeAPIKeyCmdMeta) {
 		if err := interactive.PromptAndSetFlags(cmd, revokeAPIKeyCmdMeta); err != nil {
@@ -75,7 +64,7 @@ func runRevokeApiKeyCmd(cmd *cobra.Command, args []string) error {
 	if output.WantsRawJSON(cmd) {
 		sdkOpts = append(sdkOpts, operations.WithSkipDeserialization())
 	}
-	res, err := s.APIKeys.RevokeAPIKey(cmd.Context(), security, *req, sdkOpts...)
+	res, err := s.APIKeys.RevokeAPIKey(cmd.Context(), *req, sdkOpts...)
 	if err != nil {
 		return output.Error(cmd, err)
 	}

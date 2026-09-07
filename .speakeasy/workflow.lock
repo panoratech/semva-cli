@@ -2,8 +2,8 @@ speakeasyVersion: 1.796.4
 sources:
     Semva:
         sourceNamespace: semva
-        sourceRevisionDigest: sha256:8422aeaad9520a96619b3244bba621b3e65bd4c5ea9846c0d762bbceb2dd70de
-        sourceBlobDigest: sha256:9e720a134fb71039e78b4c76285bf43d7109add32081900f7b6e575c56a03577
+        sourceRevisionDigest: sha256:bdb38aea96ef10a2cfc403f16ab9cbd91f7bb27c2d06969d7ae5883053af6c95
+        sourceBlobDigest: sha256:216902cf20f38c617a6e6d014461c0c4ef867bf7217b02271048940047c097a1
         tags:
             - latest
             - 0.1.0
@@ -11,8 +11,8 @@ targets:
     semva:
         source: Semva
         sourceNamespace: semva
-        sourceRevisionDigest: sha256:8422aeaad9520a96619b3244bba621b3e65bd4c5ea9846c0d762bbceb2dd70de
-        sourceBlobDigest: sha256:9e720a134fb71039e78b4c76285bf43d7109add32081900f7b6e575c56a03577
+        sourceRevisionDigest: sha256:bdb38aea96ef10a2cfc403f16ab9cbd91f7bb27c2d06969d7ae5883053af6c95
+        sourceBlobDigest: sha256:216902cf20f38c617a6e6d014461c0c4ef867bf7217b02271048940047c097a1
 workflow:
     workflowVersion: 1.0.0
     speakeasyVersion: latest
@@ -20,6 +20,8 @@ workflow:
         Semva:
             inputs:
                 - location: https://api.semva.dev/openapi.json
+            overlays:
+                - location: ./.speakeasy/api-key-only.yaml
             output: .speakeasy/out.openapi.yaml
             registry:
                 location: registry.speakeasyapi.dev/panora-technologies-inc/semva/semva

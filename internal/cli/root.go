@@ -119,8 +119,8 @@ func NewRootCommand() (*cobra.Command, error) {
 			"Use --agent-mode=false to disable.")
 
 	// Global security flags
-	rootCmd.PersistentFlags().String("access-token", "", "Access token issued by WorkOS AuthKit.")
-	_ = rootCmd.PersistentFlags().SetAnnotation("access-token", "speakeasy:group", []string{"Authentication"})
+	rootCmd.PersistentFlags().String("organization-api-key", "", "An organization API key, as minted by `POST /organizations/current/api-keys`.")
+	_ = rootCmd.PersistentFlags().SetAnnotation("organization-api-key", "speakeasy:group", []string{"Authentication"})
 
 	// Annotate persistent flags for grouped help display
 	for _, ga := range []struct{ flag, group string }{

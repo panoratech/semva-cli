@@ -26,8 +26,6 @@ func initGetTwinCmd(parent *cobra.Command) error {
 		Example: "  semva twins get --twin-slug <value>",
 		RunE:    runGetTwinCmd,
 	}
-	cmd.Flags().String("access-token", "", "Security credential")
-	cmd.Flags().String("organization-api-key", "", "Security credential")
 	flagutil.RegisterFlags(cmd, getTwinCmdMeta)
 	if err := flagutil.ValidateMeta[operations.GetTwinRequest](getTwinCmdMeta); err != nil {
 		return fmt.Errorf("invalid metadata for get-twin: %w", err)
@@ -40,15 +38,6 @@ func initGetTwinCmd(parent *cobra.Command) error {
 func runGetTwinCmd(cmd *cobra.Command, args []string) error {
 	if usage.UsageRequested(cmd) {
 		return usage.EmitSchema(cmd, cmd.OutOrStdout())
-	}
-	accessToken, _ := flagutil.GetStringFlag(cmd, "access-token")
-	organizationAPIKey, _ := flagutil.GetStringFlag(cmd, "organization-api-key")
-	var security operations.GetTwinSecurity
-	if cmd.Flags().Changed("access-token") {
-		security.AccessToken = &accessToken
-	}
-	if cmd.Flags().Changed("organization-api-key") {
-		security.OrganizationAPIKey = &organizationAPIKey
 	}
 	if interactive.ShouldPrompt(cmd, getTwinCmdMeta) {
 		if err := interactive.PromptAndSetFlags(cmd, getTwinCmdMeta); err != nil {
@@ -75,7 +64,7 @@ func runGetTwinCmd(cmd *cobra.Command, args []string) error {
 	if output.WantsRawJSON(cmd) {
 		sdkOpts = append(sdkOpts, operations.WithSkipDeserialization())
 	}
-	res, err := s.Twins.GetTwin(cmd.Context(), security, *req, sdkOpts...)
+	res, err := s.Twins.GetTwin(cmd.Context(), *req, sdkOpts...)
 	if err != nil {
 		return output.Error(cmd, err)
 	}

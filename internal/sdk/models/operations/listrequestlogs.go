@@ -8,25 +8,6 @@ import (
 	"github.com/panoratech/semva-cli/internal/sdk/sdkinternal/utils"
 )
 
-type ListRequestLogsSecurity struct {
-	AccessToken        *string `security:"scheme,type=http,subtype=bearer,name=Authorization"`
-	OrganizationAPIKey *string `security:"scheme,type=apiKey,subtype=header,name=X-API-Key"`
-}
-
-func (l *ListRequestLogsSecurity) GetAccessToken() *string {
-	if l == nil {
-		return nil
-	}
-	return l.AccessToken
-}
-
-func (l *ListRequestLogsSecurity) GetOrganizationAPIKey() *string {
-	if l == nil {
-		return nil
-	}
-	return l.OrganizationAPIKey
-}
-
 type ListRequestLogsRequest struct {
 	SandboxID     string                                    `pathParam:"style=simple,explode=false,name=sandbox_id"`
 	SandboxTwinID optionalnullable.OptionalNullable[string] `queryParam:"style=form,explode=true,name=sandbox_twin_id"`

@@ -27,8 +27,6 @@ func initStopCmd(parent *cobra.Command) error {
 		Example: "  semva sandboxes-twins stop --sandbox-id c596993f-a7ba-4c8f-a8ef-12fa7483b957 --sandbox-twin-id 2bc8e24b-4bd7-43d3-88b9-1466c640d1d1",
 		RunE:    runStopCmd,
 	}
-	cmd.Flags().String("access-token", "", "Security credential")
-	cmd.Flags().String("organization-api-key", "", "Security credential")
 	flagutil.RegisterFlags(cmd, stopCmdMeta)
 	if err := flagutil.ValidateMeta[operations.StopSandboxTwinRequest](stopCmdMeta); err != nil {
 		return fmt.Errorf("invalid metadata for stop: %w", err)
@@ -41,15 +39,6 @@ func initStopCmd(parent *cobra.Command) error {
 func runStopCmd(cmd *cobra.Command, args []string) error {
 	if usage.UsageRequested(cmd) {
 		return usage.EmitSchema(cmd, cmd.OutOrStdout())
-	}
-	accessToken, _ := flagutil.GetStringFlag(cmd, "access-token")
-	organizationAPIKey, _ := flagutil.GetStringFlag(cmd, "organization-api-key")
-	var security operations.StopSandboxTwinSecurity
-	if cmd.Flags().Changed("access-token") {
-		security.AccessToken = &accessToken
-	}
-	if cmd.Flags().Changed("organization-api-key") {
-		security.OrganizationAPIKey = &organizationAPIKey
 	}
 	if interactive.ShouldPrompt(cmd, stopCmdMeta) {
 		if err := interactive.PromptAndSetFlags(cmd, stopCmdMeta); err != nil {
@@ -76,7 +65,7 @@ func runStopCmd(cmd *cobra.Command, args []string) error {
 	if output.WantsRawJSON(cmd) {
 		sdkOpts = append(sdkOpts, operations.WithSkipDeserialization())
 	}
-	res, err := s.Sandboxes.Twins.Stop(cmd.Context(), security, *req, sdkOpts...)
+	res, err := s.Sandboxes.Twins.Stop(cmd.Context(), *req, sdkOpts...)
 	if err != nil {
 		return output.Error(cmd, err)
 	}

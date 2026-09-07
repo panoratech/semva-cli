@@ -110,7 +110,7 @@ semva completion powershell | Out-String | Invoke-Expression
 ### Example
 
 ```bash
-semva users read-me --access-token 'Bearer test_token'
+semva users read-me --organization-api-key test_api_key
 
 ```
 <!-- End CLI Example Usage [usage] -->
@@ -125,7 +125,7 @@ Authentication credentials can be configured in four ways (in order of priority)
 Pass credentials directly as flags to any command:
 
 ```bash
-semva --access-token <value> <command> [arguments]
+semva --organization-api-key <value> <command> [arguments]
 ```
 
 ### 2. Environment variables
@@ -134,7 +134,7 @@ Set credentials via environment variables:
 
 | Variable | Description |
 |----------|-------------|
-| `CLI_SEMVA_ACCESS_TOKEN` | Access token issued by WorkOS AuthKit. |
+| `CLI_SEMVA_ORGANIZATION_API_KEY` | An organization API key, as minted by `POST /organizations/current/api-keys`. |
 
 ### 3. OS Keychain (recommended for workstations)
 
@@ -182,8 +182,8 @@ Configuration is stored in `~/.config/semva/config.yaml`.
 
 ### [api-keys](docs/semva_api-keys.md)
 
-* [`list`](docs/semva_api-keys_list.md) - List API keys
 * [`create`](docs/semva_api-keys_create.md) - Create an API key
+* [`list`](docs/semva_api-keys_list.md) - List API keys
 * [`revoke`](docs/semva_api-keys_revoke.md) - Revoke an API key
 
 ### [twins](docs/semva_twins.md)
