@@ -11,6 +11,7 @@ import (
 	"github.com/panoratech/semva-cli/internal/testclient"
 	"github.com/spf13/cobra"
 	"net/http"
+	"strconv"
 	"time"
 )
 
@@ -20,6 +21,14 @@ import (
 func NewClient(cmd *cobra.Command) (*sdk.Semva, error) {
 	var sdkOpts []sdk.SDKOption
 	sdkOpts = append(sdkOpts, sdk.WithSecurity(buildGlobalSecurity(cmd)))
+	if serverURL, _ := flagutil.GetStringFlag(cmd, "server-url"); serverURL != "" {
+		sdkOpts = append(sdkOpts, sdk.WithServerURL(serverURL))
+	} else if serverFlag, _ := flagutil.GetStringFlag(cmd, "server"); serverFlag != "" {
+		// Silently skip non-integer or out-of-range values — they may be intended for operation-level servers.
+		if idx, err := strconv.Atoi(serverFlag); err == nil && idx >= 0 && idx < len(sdk.ServerList) {
+			sdkOpts = append(sdkOpts, sdk.WithServerIndex(idx))
+		}
+	}
 
 	// Timeout (always available)
 	if timeoutStr := resolveStringFlag(cmd, "timeout"); timeoutStr != "" {
@@ -38,8 +47,7 @@ func NewClient(cmd *cobra.Command) (*sdk.Semva, error) {
 	}
 	httpClient = WrapClientForDiagnostics(cmd, httpClient)
 	sdkOpts = append(sdkOpts, sdk.WithClient(httpClient))
-	serverURL, _ := flagutil.GetStringFlag(cmd, "server-url")
-	return sdk.New(serverURL, sdkOpts...), nil
+	return sdk.New(sdkOpts...), nil
 }
 
 // resolveStringFlag reads a string flag with priority: flag > env > config.
