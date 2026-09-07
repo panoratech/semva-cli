@@ -3,6 +3,9 @@ info:
   title: "Semva"
   description: "Backend API"
   version: "0.1.0"
+servers:
+  - url: "https://api.semva.dev"
+    description: "Production"
 paths:
   /users/me:
     get:
@@ -1737,7 +1740,7 @@ components:
   securitySchemes:
     Organization API key:
       type: "apiKey"
-      description: "An organization API key, as minted by `POST /organizations/current/api-keys`."
+      description: "An organization API key, as minted by POST /organizations/current/api-keys."
       in: "header"
       name: "X-API-Key"
 tags:

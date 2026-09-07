@@ -26,6 +26,7 @@ Semva: Backend API
   * [Authentication](#authentication)
   * [Available Commands](#available-commands)
   * [Request Body Input](#request-body-input)
+  * [Server Selection](#server-selection)
   * [Output Formats](#output-formats)
   * [Error Handling](#error-handling)
   * [Diagnostics](#diagnostics)
@@ -134,7 +135,7 @@ Set credentials via environment variables:
 
 | Variable | Description |
 |----------|-------------|
-| `CLI_SEMVA_ORGANIZATION_API_KEY` | An organization API key, as minted by `POST /organizations/current/api-keys`. |
+| `CLI_SEMVA_ORGANIZATION_API_KEY` | An organization API key, as minted by POST /organizations/current/api-keys. |
 
 ### 3. OS Keychain (recommended for workstations)
 
@@ -283,6 +284,20 @@ When multiple input methods are used, the priority is:
 | 2 | `--body` flag | Whole-body JSON via flag |
 | 3 (lowest) | Stdin | Piped JSON input |
 <!-- End Request Body Input [stdinpiping] -->
+
+<!-- Start Server Selection [server] -->
+## Server Selection
+
+### Override Server URL
+
+Use `--server-url` to override the server URL entirely, bypassing any named or indexed server selection:
+
+```bash
+semva --server-url https://custom-api.example.com <command> [arguments]
+```
+
+**Precedence**: `--server-url` > `--server` > default
+<!-- End Server Selection [server] -->
 
 <!-- Start Output Formats [output-formats] -->
 ## Output Formats
