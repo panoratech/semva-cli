@@ -3,11 +3,11 @@
 package organizations
 
 import (
-	"github.com/panoratech/semva-cli/internal/client"
-	"github.com/panoratech/semva-cli/internal/output"
-	"github.com/panoratech/semva-cli/internal/sdk"
-	"github.com/panoratech/semva-cli/internal/sdk/models/operations"
-	"github.com/panoratech/semva-cli/internal/usage"
+	"github.com/panoratech/twinbay-cli/internal/client"
+	"github.com/panoratech/twinbay-cli/internal/output"
+	"github.com/panoratech/twinbay-cli/internal/sdk"
+	"github.com/panoratech/twinbay-cli/internal/sdk/models/operations"
+	"github.com/panoratech/twinbay-cli/internal/usage"
 	"github.com/spf13/cobra"
 )
 
@@ -17,7 +17,7 @@ func initEnsureDefaultOrganizationCmd(parent *cobra.Command) error {
 		Use:     "ensure-default",
 		Short:   "Create your first organization",
 		Long:    "Idempotent: answers with the caller's oldest organization when they already belong to one, and otherwise creates one named after them, with the caller as an admin. This is what signing up calls, so that onboarding never has to ask for a name. Refresh the AuthKit session into the organization to act inside it.",
-		Example: "  semva organizations ensure-default",
+		Example: "  twinbay organizations ensure-default",
 		RunE:    runEnsureDefaultOrganizationCmd,
 		Aliases: []string{"ed"},
 	}

@@ -3,11 +3,11 @@
 package templates
 
 import (
-	"github.com/panoratech/semva-cli/internal/client"
-	"github.com/panoratech/semva-cli/internal/output"
-	"github.com/panoratech/semva-cli/internal/sdk"
-	"github.com/panoratech/semva-cli/internal/sdk/models/operations"
-	"github.com/panoratech/semva-cli/internal/usage"
+	"github.com/panoratech/twinbay-cli/internal/client"
+	"github.com/panoratech/twinbay-cli/internal/output"
+	"github.com/panoratech/twinbay-cli/internal/sdk"
+	"github.com/panoratech/twinbay-cli/internal/sdk/models/operations"
+	"github.com/panoratech/twinbay-cli/internal/usage"
 	"github.com/spf13/cobra"
 )
 
@@ -17,7 +17,7 @@ func initListCmd(parent *cobra.Command) error {
 		Use:     "list",
 		Short:   "List sandbox templates",
 		Long:    "Saved sandbox definitions. Start a sandbox from one by sending its id as `template` to `POST /sandboxes`.",
-		Example: "  semva templates list",
+		Example: "  twinbay templates list",
 		RunE:    runListCmd,
 	}
 	parent.AddCommand(cmd)

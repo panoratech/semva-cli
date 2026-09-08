@@ -3,7 +3,7 @@
 package components
 
 import (
-	"github.com/panoratech/semva-cli/internal/sdk/optionalnullable"
+	"github.com/panoratech/twinbay-cli/internal/sdk/optionalnullable"
 )
 
 // RequestLogBody - A captured payload, as the bytes it was rather than as parsed JSON.

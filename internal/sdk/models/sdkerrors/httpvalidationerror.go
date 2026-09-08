@@ -4,7 +4,7 @@ package sdkerrors
 
 import (
 	"encoding/json"
-	"github.com/panoratech/semva-cli/internal/sdk/models/components"
+	"github.com/panoratech/twinbay-cli/internal/sdk/models/components"
 )
 
 type HTTPValidationError struct {

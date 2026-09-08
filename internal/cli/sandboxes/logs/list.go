@@ -4,13 +4,13 @@ package logs
 
 import (
 	"fmt"
-	"github.com/panoratech/semva-cli/internal/client"
-	"github.com/panoratech/semva-cli/internal/flagutil"
-	"github.com/panoratech/semva-cli/internal/interactive"
-	"github.com/panoratech/semva-cli/internal/output"
-	"github.com/panoratech/semva-cli/internal/sdk"
-	"github.com/panoratech/semva-cli/internal/sdk/models/operations"
-	"github.com/panoratech/semva-cli/internal/usage"
+	"github.com/panoratech/twinbay-cli/internal/client"
+	"github.com/panoratech/twinbay-cli/internal/flagutil"
+	"github.com/panoratech/twinbay-cli/internal/interactive"
+	"github.com/panoratech/twinbay-cli/internal/output"
+	"github.com/panoratech/twinbay-cli/internal/sdk"
+	"github.com/panoratech/twinbay-cli/internal/sdk/models/operations"
+	"github.com/panoratech/twinbay-cli/internal/usage"
 	"github.com/spf13/cobra"
 )
 
@@ -27,7 +27,7 @@ func initListCmd(parent *cobra.Command) error {
 		Use:     "list",
 		Short:   "List recent sandbox request logs",
 		Long:    "List recent sandbox request logs",
-		Example: "  semva logs list --sandbox-id c98df736-32e1-45b5-9dcc-bb15ab490740",
+		Example: "  twinbay logs list --sandbox-id c98df736-32e1-45b5-9dcc-bb15ab490740",
 		RunE:    runListCmd,
 	}
 	flagutil.RegisterFlags(cmd, listCmdMeta)

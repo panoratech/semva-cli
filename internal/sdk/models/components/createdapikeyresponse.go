@@ -3,7 +3,7 @@
 package components
 
 import (
-	"github.com/panoratech/semva-cli/internal/sdk/sdkinternal/utils"
+	"github.com/panoratech/twinbay-cli/internal/sdk/sdkinternal/utils"
 	"time"
 )
 

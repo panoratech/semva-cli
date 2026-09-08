@@ -18,14 +18,14 @@ import (
 	"github.com/spf13/cobra"
 	"gopkg.in/yaml.v3"
 
-	"github.com/panoratech/semva-cli/internal/config"
-	"github.com/panoratech/semva-cli/internal/flagutil"
-	"github.com/panoratech/semva-cli/internal/sdk/models/operations"
-	"github.com/panoratech/semva-cli/internal/sdk/sdkinternal/utils"
+	"github.com/panoratech/twinbay-cli/internal/config"
+	"github.com/panoratech/twinbay-cli/internal/flagutil"
+	"github.com/panoratech/twinbay-cli/internal/sdk/models/operations"
+	"github.com/panoratech/twinbay-cli/internal/sdk/sdkinternal/utils"
 )
 
 // cliName is the CLI binary name, injected at generation time.
-const cliName = "semva"
+const cliName = "twinbay"
 
 // formatErrorBody pretty-prints a JSON body string, or returns it as-is if not valid JSON.
 func formatErrorBody(body string) string {

@@ -2,18 +2,18 @@
 version: 2
 
 # The archive name_template below interpolates .ProjectName, which GoReleaser
-# otherwise defaults to the repository name — publishing semva-cli_Darwin_arm64.tar.gz
-# while scripts/install.sh fetches semva_Darwin_arm64.tar.gz. See .genignore.
-project_name: semva
+# otherwise defaults to the repository name — publishing twinbay-cli_Darwin_arm64.tar.gz
+# while scripts/install.sh fetches twinbay_Darwin_arm64.tar.gz. See .genignore.
+project_name: twinbay
 
 before:
   hooks:
     - go mod tidy
 
 builds:
-  - id: semva
-    main: ./cmd/semva
-    binary: semva
+  - id: twinbay
+    main: ./cmd/twinbay
+    binary: twinbay
     env:
       - CGO_ENABLED=0
     goos:
@@ -29,7 +29,7 @@ builds:
       - -X main.buildTime={{.Date}}
 
 archives:
-  - id: semva
+  - id: twinbay
     formats: [tar.gz]
     name_template: >-
       {{ .ProjectName }}_
@@ -48,7 +48,7 @@ archives:
 release:
   github:
     owner: panoratech
-    name: semva-cli
+    name: twinbay-cli
   draft: false
   prerelease: auto
   mode: append

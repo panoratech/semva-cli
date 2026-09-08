@@ -4,13 +4,13 @@ package records
 
 import (
 	"fmt"
-	"github.com/panoratech/semva-cli/internal/client"
-	"github.com/panoratech/semva-cli/internal/flagutil"
-	"github.com/panoratech/semva-cli/internal/interactive"
-	"github.com/panoratech/semva-cli/internal/output"
-	"github.com/panoratech/semva-cli/internal/sdk"
-	"github.com/panoratech/semva-cli/internal/sdk/models/operations"
-	"github.com/panoratech/semva-cli/internal/usage"
+	"github.com/panoratech/twinbay-cli/internal/client"
+	"github.com/panoratech/twinbay-cli/internal/flagutil"
+	"github.com/panoratech/twinbay-cli/internal/interactive"
+	"github.com/panoratech/twinbay-cli/internal/output"
+	"github.com/panoratech/twinbay-cli/internal/sdk"
+	"github.com/panoratech/twinbay-cli/internal/sdk/models/operations"
+	"github.com/panoratech/twinbay-cli/internal/usage"
 	"github.com/spf13/cobra"
 )
 
@@ -28,7 +28,7 @@ func initUpdateCmd(parent *cobra.Command) error {
 		Use:     "update",
 		Short:   "Replace a sandbox twin record",
 		Long:    "Replace a sandbox twin record",
-		Example: "  semva records update --sandbox-id cf2a2465-9cde-4d4d-8896-6719d664c50d --sandbox-twin-id 76434c10-cd55-40e4-b5ac-f1ae38f16ed9 --resource <value> --external-id <id> --body-param '{\"key\":\"<value>\"}'",
+		Example: "  twinbay records update --sandbox-id cf2a2465-9cde-4d4d-8896-6719d664c50d --sandbox-twin-id 76434c10-cd55-40e4-b5ac-f1ae38f16ed9 --resource <value> --external-id <id> --body-param '{\"key\":\"<value>\"}'",
 		RunE:    runUpdateCmd,
 	}
 	flagutil.RegisterFlags(cmd, updateCmdMeta)

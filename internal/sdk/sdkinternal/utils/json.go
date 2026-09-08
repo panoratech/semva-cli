@@ -14,7 +14,7 @@ import (
 	"time"
 	"unsafe"
 
-	"github.com/panoratech/semva-cli/internal/sdk/types"
+	"github.com/panoratech/twinbay-cli/internal/sdk/types"
 )
 
 func MarshalJSON(v interface{}, tag reflect.StructTag, topLevel bool) ([]byte, error) {

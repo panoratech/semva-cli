@@ -1,15 +1,15 @@
 #
-# semva CLI Installation Script for Windows
-# This script downloads and installs the latest version of the semva CLI
+# twinbay CLI Installation Script for Windows
+# This script downloads and installs the latest version of the twinbay CLI
 #
 # Usage:
-#   iwr -useb https://raw.githubusercontent.com/panoratech/semva-cli/main/scripts/install.ps1 | iex
+#   iwr -useb https://raw.githubusercontent.com/panoratech/twinbay-cli/main/scripts/install.ps1 | iex
 #   or
-#   Invoke-WebRequest -Uri https://raw.githubusercontent.com/panoratech/semva-cli/main/scripts/install.ps1 -UseBasicParsing | Invoke-Expression
+#   Invoke-WebRequest -Uri https://raw.githubusercontent.com/panoratech/twinbay-cli/main/scripts/install.ps1 -UseBasicParsing | Invoke-Expression
 #
 # Options:
-#   $env:CLI_SEMVA_INSTALL_DIR - Installation directory (default: $env:LOCALAPPDATA\Programs\semva)
-#   $env:CLI_SEMVA_VERSION     - Specific version to install (default: latest)
+#   $env:CLI_TWINBAY_INSTALL_DIR - Installation directory (default: $env:LOCALAPPDATA\Programs\twinbay)
+#   $env:CLI_TWINBAY_VERSION     - Specific version to install (default: latest)
 #
 
 [CmdletBinding()]
@@ -18,11 +18,11 @@ param()
 $ErrorActionPreference = 'Stop'
 
 # Configuration
-$Repo = "panoratech/semva-cli"
-$BinaryName = "semva.exe"
-$DefaultInstallDir = Join-Path $env:LOCALAPPDATA "Programs\semva"
-$InstallDir = if ($env:CLI_SEMVA_INSTALL_DIR) { $env:CLI_SEMVA_INSTALL_DIR } else { $DefaultInstallDir }
-$Version = if ($env:CLI_SEMVA_VERSION) { $env:CLI_SEMVA_VERSION } else { "latest" }
+$Repo = "panoratech/twinbay-cli"
+$BinaryName = "twinbay.exe"
+$DefaultInstallDir = Join-Path $env:LOCALAPPDATA "Programs\twinbay"
+$InstallDir = if ($env:CLI_TWINBAY_INSTALL_DIR) { $env:CLI_TWINBAY_INSTALL_DIR } else { $DefaultInstallDir }
+$Version = if ($env:CLI_TWINBAY_VERSION) { $env:CLI_TWINBAY_VERSION } else { "latest" }
 
 # Helper functions
 function Write-ColorOutput {
@@ -58,7 +58,7 @@ function Get-Architecture {
 }
 
 function Install-CLI {
-    Write-ColorOutput "Installing semva CLI..." -Color Green
+    Write-ColorOutput "Installing twinbay CLI..." -Color Green
 
     # Detect architecture
     $arch = Get-Architecture
@@ -71,13 +71,13 @@ function Install-CLI {
     }
 
     # Construct download URL
-    $archiveName = "semva_Windows_$arch.zip"
+    $archiveName = "twinbay_Windows_$arch.zip"
     $downloadUrl = "https://github.com/$Repo/releases/download/$Version/$archiveName"
 
     Write-ColorOutput "Downloading from: $downloadUrl" -Color Cyan
 
     # Create temporary directory
-    $tempDir = Join-Path $env:TEMP "semva-install-$(New-Guid)"
+    $tempDir = Join-Path $env:TEMP "twinbay-install-$(New-Guid)"
     New-Item -ItemType Directory -Path $tempDir -Force | Out-Null
 
     try {
@@ -115,7 +115,7 @@ function Install-CLI {
 
         Copy-Item -Path (Join-Path $tempDir $BinaryName) -Destination $binaryPath -Force
 
-        Write-ColorOutput "semva $Version has been installed to $binaryPath" -Color Green
+        Write-ColorOutput "twinbay $Version has been installed to $binaryPath" -Color Green
 
         # Add to PATH if not already there
         $userPath = [Environment]::GetEnvironmentVariable("Path", "User")
@@ -130,7 +130,7 @@ function Install-CLI {
             Write-ColorOutput "Added to PATH. You may need to restart your terminal for changes to take effect." -Color Yellow
         }
 
-        Write-ColorOutput "Installation successful! Run 'semva --help' to get started." -Color Green
+        Write-ColorOutput "Installation successful! Run 'twinbay --help' to get started." -Color Green
         Write-ColorOutput "Note: You may need to restart your terminal or run 'refreshenv' for the PATH changes to take effect." -Color Yellow
     }
     finally {

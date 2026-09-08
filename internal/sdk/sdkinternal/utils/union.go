@@ -9,7 +9,7 @@ import (
 	"strings"
 	"time"
 
-	"github.com/panoratech/semva-cli/internal/sdk/types"
+	"github.com/panoratech/twinbay-cli/internal/sdk/types"
 )
 
 // UnionCandidate represents a candidate type during union deserialization

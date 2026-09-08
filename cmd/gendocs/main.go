@@ -11,7 +11,7 @@ import (
 	"path/filepath"
 	"strings"
 
-	"github.com/panoratech/semva-cli/internal/cli"
+	"github.com/panoratech/twinbay-cli/internal/cli"
 	"github.com/spf13/cobra"
 	"github.com/spf13/cobra/doc"
 )

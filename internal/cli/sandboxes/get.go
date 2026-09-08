@@ -4,13 +4,13 @@ package sandboxes
 
 import (
 	"fmt"
-	"github.com/panoratech/semva-cli/internal/client"
-	"github.com/panoratech/semva-cli/internal/flagutil"
-	"github.com/panoratech/semva-cli/internal/interactive"
-	"github.com/panoratech/semva-cli/internal/output"
-	"github.com/panoratech/semva-cli/internal/sdk"
-	"github.com/panoratech/semva-cli/internal/sdk/models/operations"
-	"github.com/panoratech/semva-cli/internal/usage"
+	"github.com/panoratech/twinbay-cli/internal/client"
+	"github.com/panoratech/twinbay-cli/internal/flagutil"
+	"github.com/panoratech/twinbay-cli/internal/interactive"
+	"github.com/panoratech/twinbay-cli/internal/output"
+	"github.com/panoratech/twinbay-cli/internal/sdk"
+	"github.com/panoratech/twinbay-cli/internal/sdk/models/operations"
+	"github.com/panoratech/twinbay-cli/internal/usage"
 	"github.com/spf13/cobra"
 )
 
@@ -24,7 +24,7 @@ func initGetCmd(parent *cobra.Command) error {
 		Use:     "get",
 		Short:   "Retrieve a sandbox",
 		Long:    "Retrieve a sandbox",
-		Example: "  semva sandboxes get --sandbox-id 713e9030-8ff2-45e6-aedb-61e8e9aa4c2f",
+		Example: "  twinbay sandboxes get --sandbox-id 713e9030-8ff2-45e6-aedb-61e8e9aa4c2f",
 		RunE:    runGetCmd,
 	}
 	flagutil.RegisterFlags(cmd, getCmdMeta)

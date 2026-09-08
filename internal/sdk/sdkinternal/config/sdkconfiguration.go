@@ -4,7 +4,7 @@ package config
 
 import (
 	"context"
-	"github.com/panoratech/semva-cli/internal/sdk/retry"
+	"github.com/panoratech/twinbay-cli/internal/sdk/retry"
 	"net/http"
 	"time"
 )

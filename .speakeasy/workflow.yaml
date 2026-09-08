@@ -1,15 +1,15 @@
 workflowVersion: 1.0.0
 speakeasyVersion: latest
 sources:
-    Semva:
+    Twinbay:
         inputs:
-            - location: https://api.semva.dev/openapi.json
+            - location: https://api.twinbay.ai/openapi.json
         overlays:
             - location: ./.speakeasy/api-key-only.yaml
         output: .speakeasy/out.openapi.yaml
         registry:
-            location: registry.speakeasyapi.dev/panora-technologies-inc/semva/semva
+            location: registry.speakeasyapi.dev/panora-technologies-inc/twinbay/twinbay
 targets:
-    semva:
+    twinbay:
         target: cli
-        source: Semva
+        source: Twinbay

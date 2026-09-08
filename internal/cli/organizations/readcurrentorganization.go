@@ -3,11 +3,11 @@
 package organizations
 
 import (
-	"github.com/panoratech/semva-cli/internal/client"
-	"github.com/panoratech/semva-cli/internal/output"
-	"github.com/panoratech/semva-cli/internal/sdk"
-	"github.com/panoratech/semva-cli/internal/sdk/models/operations"
-	"github.com/panoratech/semva-cli/internal/usage"
+	"github.com/panoratech/twinbay-cli/internal/client"
+	"github.com/panoratech/twinbay-cli/internal/output"
+	"github.com/panoratech/twinbay-cli/internal/sdk"
+	"github.com/panoratech/twinbay-cli/internal/sdk/models/operations"
+	"github.com/panoratech/twinbay-cli/internal/usage"
 	"github.com/spf13/cobra"
 )
 
@@ -17,7 +17,7 @@ func initReadCurrentOrganizationCmd(parent *cobra.Command) error {
 		Use:     "read-current",
 		Short:   "Read the active organization",
 		Long:    "The organization the access token acts in, plus the caller's role in it. Fails with 403 when the token names no organization.",
-		Example: "  semva organizations read-current",
+		Example: "  twinbay organizations read-current",
 		RunE:    runReadCurrentOrganizationCmd,
 		Aliases: []string{"rc"},
 	}

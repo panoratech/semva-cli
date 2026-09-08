@@ -1,31 +1,31 @@
 speakeasyVersion: 1.796.4
 sources:
-    Semva:
-        sourceNamespace: semva
+    Twinbay:
+        sourceNamespace: twinbay
         sourceRevisionDigest: sha256:af66bf647a07e88fff3c20c30ff947914daf3907d02896541c7a5ae5df267074
         sourceBlobDigest: sha256:d5281167fd19cb7c293a2e530cbf4c6bbe9411d26eeb506075a520d332fa9993
         tags:
             - latest
             - 0.1.0
 targets:
-    semva:
-        source: Semva
-        sourceNamespace: semva
+    twinbay:
+        source: Twinbay
+        sourceNamespace: twinbay
         sourceRevisionDigest: sha256:af66bf647a07e88fff3c20c30ff947914daf3907d02896541c7a5ae5df267074
         sourceBlobDigest: sha256:d5281167fd19cb7c293a2e530cbf4c6bbe9411d26eeb506075a520d332fa9993
 workflow:
     workflowVersion: 1.0.0
     speakeasyVersion: latest
     sources:
-        Semva:
+        Twinbay:
             inputs:
-                - location: https://api.semva.dev/openapi.json
+                - location: https://api.twinbay.ai/openapi.json
             overlays:
                 - location: ./.speakeasy/api-key-only.yaml
             output: .speakeasy/out.openapi.yaml
             registry:
-                location: registry.speakeasyapi.dev/panora-technologies-inc/semva/semva
+                location: registry.speakeasyapi.dev/panora-technologies-inc/twinbay/twinbay
     targets:
-        semva:
+        twinbay:
             target: cli
-            source: Semva
+            source: Twinbay

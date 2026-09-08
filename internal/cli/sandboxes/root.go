@@ -3,10 +3,10 @@
 package sandboxes
 
 import (
-	"github.com/panoratech/semva-cli/internal/cli/sandboxes/logs"
-	"github.com/panoratech/semva-cli/internal/cli/sandboxes/sandboxestwins"
-	"github.com/panoratech/semva-cli/internal/cli/sandboxes/templates"
-	"github.com/panoratech/semva-cli/internal/usage"
+	"github.com/panoratech/twinbay-cli/internal/cli/sandboxes/logs"
+	"github.com/panoratech/twinbay-cli/internal/cli/sandboxes/sandboxestwins"
+	"github.com/panoratech/twinbay-cli/internal/cli/sandboxes/templates"
+	"github.com/panoratech/twinbay-cli/internal/usage"
 	"github.com/spf13/cobra"
 )
 

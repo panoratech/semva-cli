@@ -1,6 +1,6 @@
 configVersion: 2.0.0
 generation:
-  sdkClassName: Semva
+  sdkClassName: Twinbay
   maintainOpenAPIOrder: true
   usageSnippets:
     optionalPropertyRendering: withExample
@@ -33,7 +33,7 @@ generation:
 cli:
   version: 0.1.1
   additionalDependencies: {}
-  cliName: semva
+  cliName: twinbay
   distribution:
     homebrew:
       enabled: false
@@ -51,7 +51,7 @@ cli:
       publisherUrl: ""
       repositoryOwner: ""
   enableCustomCodeRegions: false
-  envVarPrefix: CLI_SEMVA
+  envVarPrefix: CLI_TWINBAY
   generateRelease: true
   idiomaticMethodCollisionNames: true
   imports:
@@ -70,5 +70,5 @@ cli:
     errorColor: '#F87171'
     subtleColor: '#475569'
     successColor: '#4ADE80'
-  packageName: github.com/panoratech/semva-cli
+  packageName: github.com/panoratech/twinbay-cli
   removeStutter: true

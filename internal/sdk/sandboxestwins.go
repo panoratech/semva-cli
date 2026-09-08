@@ -6,24 +6,24 @@ import (
 	"bytes"
 	"context"
 	"fmt"
-	"github.com/panoratech/semva-cli/internal/sdk/models/components"
-	"github.com/panoratech/semva-cli/internal/sdk/models/operations"
-	"github.com/panoratech/semva-cli/internal/sdk/models/sdkerrors"
-	"github.com/panoratech/semva-cli/internal/sdk/sdkinternal/config"
-	"github.com/panoratech/semva-cli/internal/sdk/sdkinternal/hooks"
-	"github.com/panoratech/semva-cli/internal/sdk/sdkinternal/utils"
+	"github.com/panoratech/twinbay-cli/internal/sdk/models/components"
+	"github.com/panoratech/twinbay-cli/internal/sdk/models/operations"
+	"github.com/panoratech/twinbay-cli/internal/sdk/models/sdkerrors"
+	"github.com/panoratech/twinbay-cli/internal/sdk/sdkinternal/config"
+	"github.com/panoratech/twinbay-cli/internal/sdk/sdkinternal/hooks"
+	"github.com/panoratech/twinbay-cli/internal/sdk/sdkinternal/utils"
 	"net/http"
 )
 
 type SandboxesTwins struct {
 	Records *Records
 
-	rootSDK          *Semva
+	rootSDK          *Twinbay
 	sdkConfiguration config.SDKConfiguration
 	hooks            *hooks.Hooks
 }
 
-func newSandboxesTwins(rootSDK *Semva, sdkConfig config.SDKConfiguration, hooks *hooks.Hooks) *SandboxesTwins {
+func newSandboxesTwins(rootSDK *Twinbay, sdkConfig config.SDKConfiguration, hooks *hooks.Hooks) *SandboxesTwins {
 	return &SandboxesTwins{
 		rootSDK:          rootSDK,
 		sdkConfiguration: sdkConfig,

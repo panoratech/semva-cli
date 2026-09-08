@@ -4,13 +4,13 @@ package apikeys
 
 import (
 	"fmt"
-	"github.com/panoratech/semva-cli/internal/client"
-	"github.com/panoratech/semva-cli/internal/flagutil"
-	"github.com/panoratech/semva-cli/internal/interactive"
-	"github.com/panoratech/semva-cli/internal/output"
-	"github.com/panoratech/semva-cli/internal/sdk"
-	"github.com/panoratech/semva-cli/internal/sdk/models/operations"
-	"github.com/panoratech/semva-cli/internal/usage"
+	"github.com/panoratech/twinbay-cli/internal/client"
+	"github.com/panoratech/twinbay-cli/internal/flagutil"
+	"github.com/panoratech/twinbay-cli/internal/interactive"
+	"github.com/panoratech/twinbay-cli/internal/output"
+	"github.com/panoratech/twinbay-cli/internal/sdk"
+	"github.com/panoratech/twinbay-cli/internal/sdk/models/operations"
+	"github.com/panoratech/twinbay-cli/internal/usage"
 	"github.com/spf13/cobra"
 )
 
@@ -25,7 +25,7 @@ func initListApiKeysCmd(parent *cobra.Command) error {
 		Use:     "list",
 		Short:   "List API keys",
 		Long:    "Every key of the active organization that has not been revoked, oldest first. A key that has expired is still listed, so that it can be read and cleaned up rather than vanishing unexplained; `expires_at` says which. Tokens are never included. Paginated: walk the pages with `page` and `size`.",
-		Example: "  semva api-keys list",
+		Example: "  twinbay api-keys list",
 		RunE:    runListApiKeysCmd,
 	}
 	flagutil.RegisterFlags(cmd, listAPIKeysCmdMeta)

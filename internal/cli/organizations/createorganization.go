@@ -4,14 +4,14 @@ package organizations
 
 import (
 	"fmt"
-	"github.com/panoratech/semva-cli/internal/client"
-	"github.com/panoratech/semva-cli/internal/flagutil"
-	"github.com/panoratech/semva-cli/internal/interactive"
-	"github.com/panoratech/semva-cli/internal/output"
-	"github.com/panoratech/semva-cli/internal/sdk"
-	"github.com/panoratech/semva-cli/internal/sdk/models/components"
-	"github.com/panoratech/semva-cli/internal/sdk/models/operations"
-	"github.com/panoratech/semva-cli/internal/usage"
+	"github.com/panoratech/twinbay-cli/internal/client"
+	"github.com/panoratech/twinbay-cli/internal/flagutil"
+	"github.com/panoratech/twinbay-cli/internal/interactive"
+	"github.com/panoratech/twinbay-cli/internal/output"
+	"github.com/panoratech/twinbay-cli/internal/sdk"
+	"github.com/panoratech/twinbay-cli/internal/sdk/models/components"
+	"github.com/panoratech/twinbay-cli/internal/sdk/models/operations"
+	"github.com/panoratech/twinbay-cli/internal/usage"
 	"github.com/spf13/cobra"
 )
 
@@ -25,7 +25,7 @@ func initCreateOrganizationCmd(parent *cobra.Command) error {
 		Use:     "create",
 		Short:   "Create an organization",
 		Long:    "Creates the organization in WorkOS with the caller as an admin, then mirrors it locally. The caller's current token is unchanged; refresh the AuthKit session into the new organization to act inside it.",
-		Example: "  semva organizations create --name <value>",
+		Example: "  twinbay organizations create --name <value>",
 		RunE:    runCreateOrganizationCmd,
 	}
 	flagutil.RegisterFlags(cmd, createOrganizationCmdMeta)

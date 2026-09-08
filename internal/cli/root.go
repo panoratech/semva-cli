@@ -4,15 +4,15 @@ package cli
 
 import (
 	"fmt"
-	"github.com/panoratech/semva-cli/internal/cli/apikeys"
-	"github.com/panoratech/semva-cli/internal/cli/organizations"
-	"github.com/panoratech/semva-cli/internal/cli/sandboxes"
-	"github.com/panoratech/semva-cli/internal/cli/twins"
-	"github.com/panoratech/semva-cli/internal/cli/users"
-	"github.com/panoratech/semva-cli/internal/config"
-	"github.com/panoratech/semva-cli/internal/explorer"
-	"github.com/panoratech/semva-cli/internal/output"
-	"github.com/panoratech/semva-cli/internal/usage"
+	"github.com/panoratech/twinbay-cli/internal/cli/apikeys"
+	"github.com/panoratech/twinbay-cli/internal/cli/organizations"
+	"github.com/panoratech/twinbay-cli/internal/cli/sandboxes"
+	"github.com/panoratech/twinbay-cli/internal/cli/twins"
+	"github.com/panoratech/twinbay-cli/internal/cli/users"
+	"github.com/panoratech/twinbay-cli/internal/config"
+	"github.com/panoratech/twinbay-cli/internal/explorer"
+	"github.com/panoratech/twinbay-cli/internal/output"
+	"github.com/panoratech/twinbay-cli/internal/usage"
 	"github.com/spf13/cobra"
 	"github.com/spf13/pflag"
 	"golang.org/x/term"
@@ -28,9 +28,9 @@ func NewRootCommand() (*cobra.Command, error) {
 	cobra.AddTemplateFunc("groupedFlagUsages", groupedFlagUsages)
 	cobra.AddTemplateFunc("groupedGlobalFlagUsages", groupedGlobalFlagUsages)
 	rootCmd := &cobra.Command{
-		Use:           "semva",
-		Short:         "Semva: Backend API",
-		Long:          "Semva: Backend API",
+		Use:           "twinbay",
+		Short:         "Twinbay: Backend API",
+		Long:          "Twinbay: Backend API",
 		SilenceUsage:  true,
 		SilenceErrors: true,
 		RunE: func(cmd *cobra.Command, args []string) error {
@@ -43,7 +43,7 @@ func NewRootCommand() (*cobra.Command, error) {
 			if usage.UsageRequested(cmd) {
 				return nil
 			}
-			if err := config.Init("semva", "CLI_SEMVA"); err != nil {
+			if err := config.Init("twinbay", "CLI_TWINBAY"); err != nil {
 				return err
 			}
 			output.InitAgentMode(cmd)

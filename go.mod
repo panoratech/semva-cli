@@ -1,4 +1,4 @@
-module github.com/panoratech/semva-cli
+module github.com/panoratech/twinbay-cli
 
 go 1.25.10
 

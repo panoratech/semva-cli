@@ -4,13 +4,13 @@ package sandboxestwins
 
 import (
 	"fmt"
-	"github.com/panoratech/semva-cli/internal/client"
-	"github.com/panoratech/semva-cli/internal/flagutil"
-	"github.com/panoratech/semva-cli/internal/interactive"
-	"github.com/panoratech/semva-cli/internal/output"
-	"github.com/panoratech/semva-cli/internal/sdk"
-	"github.com/panoratech/semva-cli/internal/sdk/models/operations"
-	"github.com/panoratech/semva-cli/internal/usage"
+	"github.com/panoratech/twinbay-cli/internal/client"
+	"github.com/panoratech/twinbay-cli/internal/flagutil"
+	"github.com/panoratech/twinbay-cli/internal/interactive"
+	"github.com/panoratech/twinbay-cli/internal/output"
+	"github.com/panoratech/twinbay-cli/internal/sdk"
+	"github.com/panoratech/twinbay-cli/internal/sdk/models/operations"
+	"github.com/panoratech/twinbay-cli/internal/usage"
 	"github.com/spf13/cobra"
 )
 
@@ -25,7 +25,7 @@ func initCredentialCmd(parent *cobra.Command) error {
 		Use:     "credential",
 		Short:   "Collect the twin's API key",
 		Long:    "Returns the key once. A second call is refused.",
-		Example: "  semva sandboxes-twins credential --sandbox-id cc29592e-1d70-4c21-bc2e-8e72393deee2 --sandbox-twin-id 9fa09c5a-ef7c-4178-8ed1-40c62888eee8",
+		Example: "  twinbay sandboxes-twins credential --sandbox-id cc29592e-1d70-4c21-bc2e-8e72393deee2 --sandbox-twin-id 9fa09c5a-ef7c-4178-8ed1-40c62888eee8",
 		RunE:    runCredentialCmd,
 	}
 	flagutil.RegisterFlags(cmd, credentialCmdMeta)

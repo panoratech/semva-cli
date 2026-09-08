@@ -4,13 +4,13 @@ package templates
 
 import (
 	"fmt"
-	"github.com/panoratech/semva-cli/internal/client"
-	"github.com/panoratech/semva-cli/internal/flagutil"
-	"github.com/panoratech/semva-cli/internal/interactive"
-	"github.com/panoratech/semva-cli/internal/output"
-	"github.com/panoratech/semva-cli/internal/sdk"
-	"github.com/panoratech/semva-cli/internal/sdk/models/operations"
-	"github.com/panoratech/semva-cli/internal/usage"
+	"github.com/panoratech/twinbay-cli/internal/client"
+	"github.com/panoratech/twinbay-cli/internal/flagutil"
+	"github.com/panoratech/twinbay-cli/internal/interactive"
+	"github.com/panoratech/twinbay-cli/internal/output"
+	"github.com/panoratech/twinbay-cli/internal/sdk"
+	"github.com/panoratech/twinbay-cli/internal/sdk/models/operations"
+	"github.com/panoratech/twinbay-cli/internal/usage"
 	"github.com/spf13/cobra"
 )
 
@@ -24,7 +24,7 @@ func initDeleteCmd(parent *cobra.Command) error {
 		Use:     "delete",
 		Short:   "Delete a sandbox template",
 		Long:    "Sandboxes already started from it are untouched.",
-		Example: "  semva templates delete --template-id a20706ee-1743-41a5-b94e-257617129b0a",
+		Example: "  twinbay templates delete --template-id a20706ee-1743-41a5-b94e-257617129b0a",
 		RunE:    runDeleteCmd,
 	}
 	flagutil.RegisterFlags(cmd, deleteCmdMeta)

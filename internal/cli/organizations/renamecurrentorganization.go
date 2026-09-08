@@ -4,14 +4,14 @@ package organizations
 
 import (
 	"fmt"
-	"github.com/panoratech/semva-cli/internal/client"
-	"github.com/panoratech/semva-cli/internal/flagutil"
-	"github.com/panoratech/semva-cli/internal/interactive"
-	"github.com/panoratech/semva-cli/internal/output"
-	"github.com/panoratech/semva-cli/internal/sdk"
-	"github.com/panoratech/semva-cli/internal/sdk/models/components"
-	"github.com/panoratech/semva-cli/internal/sdk/models/operations"
-	"github.com/panoratech/semva-cli/internal/usage"
+	"github.com/panoratech/twinbay-cli/internal/client"
+	"github.com/panoratech/twinbay-cli/internal/flagutil"
+	"github.com/panoratech/twinbay-cli/internal/interactive"
+	"github.com/panoratech/twinbay-cli/internal/output"
+	"github.com/panoratech/twinbay-cli/internal/sdk"
+	"github.com/panoratech/twinbay-cli/internal/sdk/models/components"
+	"github.com/panoratech/twinbay-cli/internal/sdk/models/operations"
+	"github.com/panoratech/twinbay-cli/internal/usage"
 	"github.com/spf13/cobra"
 )
 
@@ -25,7 +25,7 @@ func initRenameCurrentOrganizationCmd(parent *cobra.Command) error {
 		Use:     "rename-current",
 		Short:   "Rename the active organization",
 		Long:    "Requires the **admin** role or above in the active organization.",
-		Example: "  semva organizations rename-current --name <value>",
+		Example: "  twinbay organizations rename-current --name <value>",
 		RunE:    runRenameCurrentOrganizationCmd,
 		Aliases: []string{"rcu"},
 	}

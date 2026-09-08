@@ -4,13 +4,13 @@ package sandboxestwins
 
 import (
 	"fmt"
-	"github.com/panoratech/semva-cli/internal/client"
-	"github.com/panoratech/semva-cli/internal/flagutil"
-	"github.com/panoratech/semva-cli/internal/interactive"
-	"github.com/panoratech/semva-cli/internal/output"
-	"github.com/panoratech/semva-cli/internal/sdk"
-	"github.com/panoratech/semva-cli/internal/sdk/models/operations"
-	"github.com/panoratech/semva-cli/internal/usage"
+	"github.com/panoratech/twinbay-cli/internal/client"
+	"github.com/panoratech/twinbay-cli/internal/flagutil"
+	"github.com/panoratech/twinbay-cli/internal/interactive"
+	"github.com/panoratech/twinbay-cli/internal/output"
+	"github.com/panoratech/twinbay-cli/internal/sdk"
+	"github.com/panoratech/twinbay-cli/internal/sdk/models/operations"
+	"github.com/panoratech/twinbay-cli/internal/usage"
 	"github.com/spf13/cobra"
 )
 
@@ -25,7 +25,7 @@ func initStartCmd(parent *cobra.Command) error {
 		Use:     "start",
 		Short:   "Start a sandbox twin",
 		Long:    "Queues a fresh container. Its state and credentials are new.",
-		Example: "  semva sandboxes-twins start --sandbox-id 6487b8fc-9461-4e43-92a9-daf1ccba9d95 --sandbox-twin-id 63cbc00d-b389-49c5-a459-8c61543273fd",
+		Example: "  twinbay sandboxes-twins start --sandbox-id 6487b8fc-9461-4e43-92a9-daf1ccba9d95 --sandbox-twin-id 63cbc00d-b389-49c5-a459-8c61543273fd",
 		RunE:    runStartCmd,
 	}
 	flagutil.RegisterFlags(cmd, startCmdMeta)
