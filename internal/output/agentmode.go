@@ -11,7 +11,7 @@ import (
 
 	"github.com/spf13/cobra"
 
-	"github.com/panoratech/semva-cli/internal/flagutil"
+	"github.com/panoratech/twinbay-cli/internal/flagutil"
 )
 
 var (

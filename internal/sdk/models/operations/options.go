@@ -4,8 +4,8 @@ package operations
 
 import (
 	"errors"
-	"github.com/panoratech/semva-cli/internal/sdk/retry"
-	"github.com/panoratech/semva-cli/internal/sdk/sdkinternal/utils"
+	"github.com/panoratech/twinbay-cli/internal/sdk/retry"
+	"github.com/panoratech/twinbay-cli/internal/sdk/sdkinternal/utils"
 	"time"
 )
 

@@ -15,9 +15,9 @@ import (
 	"github.com/spf13/cobra"
 	"golang.org/x/term"
 
-	"github.com/panoratech/semva-cli/internal/config"
-	"github.com/panoratech/semva-cli/internal/flagutil"
-	"github.com/panoratech/semva-cli/internal/output"
+	"github.com/panoratech/twinbay-cli/internal/config"
+	"github.com/panoratech/twinbay-cli/internal/flagutil"
+	"github.com/panoratech/twinbay-cli/internal/output"
 )
 
 // IsInteractive returns true when the CLI should use interactive features.

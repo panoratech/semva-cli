@@ -4,13 +4,13 @@ package apikeys
 
 import (
 	"fmt"
-	"github.com/panoratech/semva-cli/internal/client"
-	"github.com/panoratech/semva-cli/internal/flagutil"
-	"github.com/panoratech/semva-cli/internal/interactive"
-	"github.com/panoratech/semva-cli/internal/output"
-	"github.com/panoratech/semva-cli/internal/sdk"
-	"github.com/panoratech/semva-cli/internal/sdk/models/operations"
-	"github.com/panoratech/semva-cli/internal/usage"
+	"github.com/panoratech/twinbay-cli/internal/client"
+	"github.com/panoratech/twinbay-cli/internal/flagutil"
+	"github.com/panoratech/twinbay-cli/internal/interactive"
+	"github.com/panoratech/twinbay-cli/internal/output"
+	"github.com/panoratech/twinbay-cli/internal/sdk"
+	"github.com/panoratech/twinbay-cli/internal/sdk/models/operations"
+	"github.com/panoratech/twinbay-cli/internal/usage"
 	"github.com/spf13/cobra"
 )
 
@@ -24,7 +24,7 @@ func initRevokeApiKeyCmd(parent *cobra.Command) error {
 		Use:     "revoke",
 		Short:   "Revoke an API key",
 		Long:    "The key stops working immediately. Its row stays, so a key seen in a log can still be named, and its token can never be minted again.",
-		Example: "  semva api-keys revoke --api-key-id 70d05b12-db01-4e93-afb7-c26ecf254345",
+		Example: "  twinbay api-keys revoke --api-key-id 70d05b12-db01-4e93-afb7-c26ecf254345",
 		RunE:    runRevokeApiKeyCmd,
 	}
 	flagutil.RegisterFlags(cmd, revokeAPIKeyCmdMeta)

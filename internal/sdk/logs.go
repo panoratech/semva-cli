@@ -6,22 +6,22 @@ import (
 	"bytes"
 	"context"
 	"fmt"
-	"github.com/panoratech/semva-cli/internal/sdk/models/components"
-	"github.com/panoratech/semva-cli/internal/sdk/models/operations"
-	"github.com/panoratech/semva-cli/internal/sdk/models/sdkerrors"
-	"github.com/panoratech/semva-cli/internal/sdk/sdkinternal/config"
-	"github.com/panoratech/semva-cli/internal/sdk/sdkinternal/hooks"
-	"github.com/panoratech/semva-cli/internal/sdk/sdkinternal/utils"
+	"github.com/panoratech/twinbay-cli/internal/sdk/models/components"
+	"github.com/panoratech/twinbay-cli/internal/sdk/models/operations"
+	"github.com/panoratech/twinbay-cli/internal/sdk/models/sdkerrors"
+	"github.com/panoratech/twinbay-cli/internal/sdk/sdkinternal/config"
+	"github.com/panoratech/twinbay-cli/internal/sdk/sdkinternal/hooks"
+	"github.com/panoratech/twinbay-cli/internal/sdk/sdkinternal/utils"
 	"net/http"
 )
 
 type Logs struct {
-	rootSDK          *Semva
+	rootSDK          *Twinbay
 	sdkConfiguration config.SDKConfiguration
 	hooks            *hooks.Hooks
 }
 
-func newLogs(rootSDK *Semva, sdkConfig config.SDKConfiguration, hooks *hooks.Hooks) *Logs {
+func newLogs(rootSDK *Twinbay, sdkConfig config.SDKConfiguration, hooks *hooks.Hooks) *Logs {
 	return &Logs{
 		rootSDK:          rootSDK,
 		sdkConfiguration: sdkConfig,

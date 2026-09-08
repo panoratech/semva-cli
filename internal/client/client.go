@@ -4,11 +4,11 @@ package client
 
 import (
 	"fmt"
-	"github.com/panoratech/semva-cli/internal/config"
-	"github.com/panoratech/semva-cli/internal/flagutil"
-	"github.com/panoratech/semva-cli/internal/sdk"
-	"github.com/panoratech/semva-cli/internal/sdk/models/components"
-	"github.com/panoratech/semva-cli/internal/testclient"
+	"github.com/panoratech/twinbay-cli/internal/config"
+	"github.com/panoratech/twinbay-cli/internal/flagutil"
+	"github.com/panoratech/twinbay-cli/internal/sdk"
+	"github.com/panoratech/twinbay-cli/internal/sdk/models/components"
+	"github.com/panoratech/twinbay-cli/internal/testclient"
 	"github.com/spf13/cobra"
 	"net/http"
 	"strconv"
@@ -18,7 +18,7 @@ import (
 // NewClient creates a new SDK client configured from command flags and environment.
 // It handles global security, server URL/selection override, global parameters,
 // retry configuration, timeout, and test client injection.
-func NewClient(cmd *cobra.Command) (*sdk.Semva, error) {
+func NewClient(cmd *cobra.Command) (*sdk.Twinbay, error) {
 	var sdkOpts []sdk.SDKOption
 	sdkOpts = append(sdkOpts, sdk.WithSecurity(buildGlobalSecurity(cmd)))
 	if serverURL, _ := flagutil.GetStringFlag(cmd, "server-url"); serverURL != "" {

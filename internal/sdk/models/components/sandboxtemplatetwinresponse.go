@@ -3,7 +3,7 @@
 package components
 
 import (
-	"github.com/panoratech/semva-cli/internal/sdk/optionalnullable"
+	"github.com/panoratech/twinbay-cli/internal/sdk/optionalnullable"
 )
 
 // SandboxTemplateTwinResponse - A slot a template asks for, named as a create request names it.

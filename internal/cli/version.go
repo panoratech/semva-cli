@@ -4,15 +4,15 @@ package cli
 
 import (
 	"fmt"
-	"github.com/panoratech/semva-cli/internal/usage"
+	"github.com/panoratech/twinbay-cli/internal/usage"
 	"github.com/spf13/cobra"
 )
 
 // Version is the current version of the CLI, defaulting to the version from gen.yaml.
 // It can be overridden at build time via ldflags targeting the main package,
-// which propagates the value here (see cmd/semva/main.go):
+// which propagates the value here (see cmd/twinbay/main.go):
 //
-//	go build -ldflags "-X main.version=x.y.z" ./cmd/semva
+//	go build -ldflags "-X main.version=x.y.z" ./cmd/twinbay
 var Version = "0.1.1"
 
 // BuildTime is optionally set at build time via ldflags targeting the main package.
@@ -23,17 +23,17 @@ func initVersionCmd(parent *cobra.Command) error {
 	var cmd = &cobra.Command{
 		Use:   "version",
 		Short: "Print the CLI version",
-		Long: `Print the current version of the semva CLI.
+		Long: `Print the current version of the twinbay CLI.
 
 The version defaults to the SDK version set during generation, but can be
 overridden at build time using Go linker flags:
 
-  go build -ldflags "-X main.version=x.y.z -X main.buildTime=$(date -u +%Y-%m-%dT%H:%M:%SZ)" ./cmd/semva`,
+  go build -ldflags "-X main.version=x.y.z -X main.buildTime=$(date -u +%Y-%m-%dT%H:%M:%SZ)" ./cmd/twinbay`,
 		RunE: func(cmd *cobra.Command, args []string) error {
 			if usage.UsageRequested(cmd) {
 				return usage.EmitSchema(cmd, cmd.OutOrStdout())
 			}
-			if _, err := fmt.Fprintf(cmd.OutOrStdout(), "semva %s\n", Version); err != nil {
+			if _, err := fmt.Fprintf(cmd.OutOrStdout(), "twinbay %s\n", Version); err != nil {
 				return err
 			}
 			if BuildTime != "" {

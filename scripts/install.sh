@@ -1,27 +1,27 @@
 #!/usr/bin/env bash
 #
-# semva CLI Installation Script
-# This script downloads and installs the latest version of the semva CLI
+# twinbay CLI Installation Script
+# This script downloads and installs the latest version of the twinbay CLI
 # for Linux and macOS systems.
 #
 # Usage:
-#   curl -fsSL https://raw.githubusercontent.com/panoratech/semva-cli/main/scripts/install.sh | bash
+#   curl -fsSL https://raw.githubusercontent.com/panoratech/twinbay-cli/main/scripts/install.sh | bash
 #   or
-#   wget -qO- https://raw.githubusercontent.com/panoratech/semva-cli/main/scripts/install.sh | bash
+#   wget -qO- https://raw.githubusercontent.com/panoratech/twinbay-cli/main/scripts/install.sh | bash
 #
 # Options:
-#   CLI_SEMVA_INSTALL_DIR - Installation directory (default: /usr/local/bin)
-#   CLI_SEMVA_VERSION     - Specific version to install (default: latest)
+#   CLI_TWINBAY_INSTALL_DIR - Installation directory (default: /usr/local/bin)
+#   CLI_TWINBAY_VERSION     - Specific version to install (default: latest)
 #
 
 set -e
 
 # Configuration
-REPO="panoratech/semva-cli"
+REPO="panoratech/twinbay-cli"
 DEFAULT_INSTALL_DIR="/usr/local/bin"
 USER_INSTALL_DIR="$HOME/.local/bin"
-VERSION="${CLI_SEMVA_VERSION:-latest}"
-BINARY_NAME="semva"
+VERSION="${CLI_TWINBAY_VERSION:-latest}"
+BINARY_NAME="twinbay"
 
 # Colors for output
 RED='\033[0;31m'
@@ -92,8 +92,8 @@ get_latest_version() {
 # Determine installation directory
 get_install_dir() {
     # If user specified a directory, use it
-    if [ -n "${CLI_SEMVA_INSTALL_DIR}" ]; then
-        echo "${CLI_SEMVA_INSTALL_DIR}"
+    if [ -n "${CLI_TWINBAY_INSTALL_DIR}" ]; then
+        echo "${CLI_TWINBAY_INSTALL_DIR}"
         return
     fi
 
@@ -175,7 +175,7 @@ install_cli() {
     if [ ! -d "$INSTALL_DIR" ]; then
         log_info "Creating installation directory: $INSTALL_DIR"
         mkdir -p "$INSTALL_DIR" || {
-            log_error "Failed to create $INSTALL_DIR. Try running with sudo or set CLI_SEMVA_INSTALL_DIR to a writable location."
+            log_error "Failed to create $INSTALL_DIR. Try running with sudo or set CLI_TWINBAY_INSTALL_DIR to a writable location."
             exit 1
         }
     fi
@@ -191,14 +191,14 @@ install_cli() {
 
     log_info "Installing to $target_binary..."
     if ! mv "$source_binary" "$target_binary"; then
-        log_error "Failed to install to $INSTALL_DIR. Try running with sudo or set CLI_SEMVA_INSTALL_DIR to a writable location."
+        log_error "Failed to install to $INSTALL_DIR. Try running with sudo or set CLI_TWINBAY_INSTALL_DIR to a writable location."
         exit 1
     fi
 
     # Make executable (not needed on Windows, but doesn't hurt)
     chmod +x "$target_binary" 2>/dev/null || true
 
-    log_info "semva ${VERSION} has been installed to $target_binary"
+    log_info "twinbay ${VERSION} has been installed to $target_binary"
 
     # Verify installation
     local cmd_to_check="$BINARY_NAME"
@@ -223,7 +223,7 @@ install_cli() {
 
 # Main execution
 main() {
-    log_info "Installing semva CLI..."
+    log_info "Installing twinbay CLI..."
     install_cli
 }
 

@@ -4,8 +4,8 @@ package cli
 
 import (
 	"fmt"
-	"github.com/panoratech/semva-cli/internal/config"
-	"github.com/panoratech/semva-cli/internal/usage"
+	"github.com/panoratech/twinbay-cli/internal/config"
+	"github.com/panoratech/twinbay-cli/internal/usage"
 	"github.com/spf13/cobra"
 )
 
@@ -18,9 +18,9 @@ func initWhoamiCmd(parent *cobra.Command) error {
 
 Sources are shown as:
   [flag]    - Set via command line flag
-  [env]     - Set via environment variable (CLI_SEMVA_*)
+  [env]     - Set via environment variable (CLI_TWINBAY_*)
   [keyring] - Set via OS keychain (stored by configure command)
-  [config]  - Set via config file (~/.config/semva/config.yaml)
+  [config]  - Set via config file (~/.config/twinbay/config.yaml)
   [unset]   - Not configured
 
 Credential values are masked for security.`,
@@ -40,7 +40,7 @@ func runWhoamiCmd(cmd *cobra.Command, args []string) error {
 	fmt.Fprintln(out, "=============")
 	fmt.Fprintln(out)
 	fmt.Fprintf(out, "Config file: %s\n", config.GetConfigPath())
-	fmt.Fprintf(out, "Environment prefix: CLI_SEMVA_\n")
+	fmt.Fprintf(out, "Environment prefix: CLI_TWINBAY_\n")
 	fmt.Fprintln(out)
 	fmt.Fprintln(out, "Credentials:")
 

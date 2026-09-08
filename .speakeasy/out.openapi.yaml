@@ -1,10 +1,10 @@
 openapi: "3.1.0"
 info:
-  title: "Semva"
+  title: "Twinbay"
   description: "Backend API"
   version: "0.1.0"
 servers:
-  - url: "https://api.semva.dev"
+  - url: "https://api.twinbay.ai"
     description: "Production"
 paths:
   /users/me:

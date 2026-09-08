@@ -6,7 +6,7 @@ import (
 	"context"
 	"errors"
 	"fmt"
-	"github.com/panoratech/semva-cli/internal/sdk/retry"
+	"github.com/panoratech/twinbay-cli/internal/sdk/retry"
 	"io"
 	"math"
 	"math/rand"

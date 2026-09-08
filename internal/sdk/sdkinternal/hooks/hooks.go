@@ -5,7 +5,7 @@ package hooks
 import (
 	"context"
 	"errors"
-	"github.com/panoratech/semva-cli/internal/sdk/sdkinternal/config"
+	"github.com/panoratech/twinbay-cli/internal/sdk/sdkinternal/config"
 	"net/http"
 )
 

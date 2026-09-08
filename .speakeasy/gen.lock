@@ -7,8 +7,8 @@ management:
   generationVersion: 2.935.1
   releaseVersion: 0.1.1
   configChecksum: 7ead6563d383422347a55c435f6c39d2
-  repoURL: https://github.com/panoratech/semva-cli.git
-  installationURL: https://github.com/panoratech/semva-cli
+  repoURL: https://github.com/panoratech/twinbay-cli.git
+  installationURL: https://github.com/panoratech/twinbay-cli
 persistentEdits:
   generation_id: 54b15db6-8052-4ce7-9d3d-014f805bf110
   pristine_commit_hash: 27db4d05e8983d25e69d09691d6279473f916514
@@ -41,7 +41,7 @@ trackedFiles:
     id: 20d9382a7dff
     last_write_checksum: sha1:d1100a1a879230c061a5f0fe3488f2888a8e4747
     pristine_git_object: 16a437433c90cf5ea695457a7f4d504a1e41a6e0
-  cmd/semva/main.go:
+  cmd/twinbay/main.go:
     id: de3a58f2e10d
     last_write_checksum: sha1:014808cee29dc147f99f6ae64e17232b392f2d30
     pristine_git_object: e4e9f779d0e3e99269975b30f9718f26c63af92e
@@ -605,7 +605,7 @@ trackedFiles:
     id: f79aa64cde4d
     last_write_checksum: sha1:0836cfcfcbd045add0143bb219266a2189faecec
     pristine_git_object: 9106bda3d5505a23fb667b7cadcd91bf5aebef54
-  internal/sdk/semva.go:
+  internal/sdk/twinbay.go:
     id: 145fe237f269
     last_write_checksum: sha1:b661a7c56899d0cb352f097668b81f71a902a16c
     pristine_git_object: 32056aa6801e3f735c6c975ab28275e67bb79df1

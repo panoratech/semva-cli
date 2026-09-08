@@ -10,8 +10,8 @@ import (
 	"strings"
 	"time"
 
-	"github.com/panoratech/semva-cli/internal/sdk/optionalnullable"
-	"github.com/panoratech/semva-cli/internal/sdk/types"
+	"github.com/panoratech/twinbay-cli/internal/sdk/optionalnullable"
+	"github.com/panoratech/twinbay-cli/internal/sdk/types"
 )
 
 func populateForm(paramName string, explode bool, objType reflect.Type, objValue reflect.Value, delimiter string, defaultValue *string, allowEmptyValue map[string]struct{}, getFieldName func(reflect.StructField) string) url.Values {

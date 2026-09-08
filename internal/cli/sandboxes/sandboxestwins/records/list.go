@@ -4,13 +4,13 @@ package records
 
 import (
 	"fmt"
-	"github.com/panoratech/semva-cli/internal/client"
-	"github.com/panoratech/semva-cli/internal/flagutil"
-	"github.com/panoratech/semva-cli/internal/interactive"
-	"github.com/panoratech/semva-cli/internal/output"
-	"github.com/panoratech/semva-cli/internal/sdk"
-	"github.com/panoratech/semva-cli/internal/sdk/models/operations"
-	"github.com/panoratech/semva-cli/internal/usage"
+	"github.com/panoratech/twinbay-cli/internal/client"
+	"github.com/panoratech/twinbay-cli/internal/flagutil"
+	"github.com/panoratech/twinbay-cli/internal/interactive"
+	"github.com/panoratech/twinbay-cli/internal/output"
+	"github.com/panoratech/twinbay-cli/internal/sdk"
+	"github.com/panoratech/twinbay-cli/internal/sdk/models/operations"
+	"github.com/panoratech/twinbay-cli/internal/usage"
 	"github.com/spf13/cobra"
 )
 
@@ -26,7 +26,7 @@ func initListCmd(parent *cobra.Command) error {
 		Use:     "list",
 		Short:   "List sandbox twin state",
 		Long:    "List sandbox twin state",
-		Example: "  semva records list --sandbox-id 6f60bb85-deb3-43ae-bb26-ebef09e653bb --sandbox-twin-id 4283a66c-a030-40f0-a3d5-549f98bcda12 --resource <value>",
+		Example: "  twinbay records list --sandbox-id 6f60bb85-deb3-43ae-bb26-ebef09e653bb --sandbox-twin-id 4283a66c-a030-40f0-a3d5-549f98bcda12 --resource <value>",
 		RunE:    runListCmd,
 	}
 	flagutil.RegisterFlags(cmd, listCmdMeta)

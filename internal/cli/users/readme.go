@@ -3,11 +3,11 @@
 package users
 
 import (
-	"github.com/panoratech/semva-cli/internal/client"
-	"github.com/panoratech/semva-cli/internal/output"
-	"github.com/panoratech/semva-cli/internal/sdk"
-	"github.com/panoratech/semva-cli/internal/sdk/models/operations"
-	"github.com/panoratech/semva-cli/internal/usage"
+	"github.com/panoratech/twinbay-cli/internal/client"
+	"github.com/panoratech/twinbay-cli/internal/output"
+	"github.com/panoratech/twinbay-cli/internal/sdk"
+	"github.com/panoratech/twinbay-cli/internal/sdk/models/operations"
+	"github.com/panoratech/twinbay-cli/internal/usage"
 	"github.com/spf13/cobra"
 )
 
@@ -17,7 +17,7 @@ func initReadMeCmd(parent *cobra.Command) error {
 		Use:     "read-me",
 		Short:   "Read the authenticated user",
 		Long:    "Returns the caller, the organization their token acts in, and every organization they belong to with their role in each. A caller who has not joined an organization yet gets a null active organization, which is how the client knows to show onboarding.",
-		Example: "  semva users read-me",
+		Example: "  twinbay users read-me",
 		RunE:    runReadMeCmd,
 		Aliases: []string{"rm"},
 	}

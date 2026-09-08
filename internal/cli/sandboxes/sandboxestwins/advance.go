@@ -4,13 +4,13 @@ package sandboxestwins
 
 import (
 	"fmt"
-	"github.com/panoratech/semva-cli/internal/client"
-	"github.com/panoratech/semva-cli/internal/flagutil"
-	"github.com/panoratech/semva-cli/internal/interactive"
-	"github.com/panoratech/semva-cli/internal/output"
-	"github.com/panoratech/semva-cli/internal/sdk"
-	"github.com/panoratech/semva-cli/internal/sdk/models/operations"
-	"github.com/panoratech/semva-cli/internal/usage"
+	"github.com/panoratech/twinbay-cli/internal/client"
+	"github.com/panoratech/twinbay-cli/internal/flagutil"
+	"github.com/panoratech/twinbay-cli/internal/interactive"
+	"github.com/panoratech/twinbay-cli/internal/output"
+	"github.com/panoratech/twinbay-cli/internal/sdk"
+	"github.com/panoratech/twinbay-cli/internal/sdk/models/operations"
+	"github.com/panoratech/twinbay-cli/internal/usage"
 	"github.com/spf13/cobra"
 )
 
@@ -26,7 +26,7 @@ func initAdvanceCmd(parent *cobra.Command) error {
 		Use:     "advance",
 		Short:   "Advance a deterministic twin lifecycle",
 		Long:    "Advance a deterministic twin lifecycle",
-		Example: "  semva sandboxes-twins advance --sandbox-id 0e5430b8-577a-40fb-a158-9fc5ad75ab04 --sandbox-twin-id 10a63cd8-60d5-4c91-bbd5-7c17aa12a3d7",
+		Example: "  twinbay sandboxes-twins advance --sandbox-id 0e5430b8-577a-40fb-a158-9fc5ad75ab04 --sandbox-twin-id 10a63cd8-60d5-4c91-bbd5-7c17aa12a3d7",
 		RunE:    runAdvanceCmd,
 	}
 	flagutil.RegisterFlags(cmd, advanceCmdMeta)

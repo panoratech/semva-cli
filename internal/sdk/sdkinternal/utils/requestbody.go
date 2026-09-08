@@ -15,7 +15,7 @@ import (
 	"reflect"
 	"regexp"
 
-	"github.com/panoratech/semva-cli/internal/sdk/optionalnullable"
+	"github.com/panoratech/twinbay-cli/internal/sdk/optionalnullable"
 )
 
 const (

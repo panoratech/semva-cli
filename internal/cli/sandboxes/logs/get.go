@@ -4,13 +4,13 @@ package logs
 
 import (
 	"fmt"
-	"github.com/panoratech/semva-cli/internal/client"
-	"github.com/panoratech/semva-cli/internal/flagutil"
-	"github.com/panoratech/semva-cli/internal/interactive"
-	"github.com/panoratech/semva-cli/internal/output"
-	"github.com/panoratech/semva-cli/internal/sdk"
-	"github.com/panoratech/semva-cli/internal/sdk/models/operations"
-	"github.com/panoratech/semva-cli/internal/usage"
+	"github.com/panoratech/twinbay-cli/internal/client"
+	"github.com/panoratech/twinbay-cli/internal/flagutil"
+	"github.com/panoratech/twinbay-cli/internal/interactive"
+	"github.com/panoratech/twinbay-cli/internal/output"
+	"github.com/panoratech/twinbay-cli/internal/sdk"
+	"github.com/panoratech/twinbay-cli/internal/sdk/models/operations"
+	"github.com/panoratech/twinbay-cli/internal/usage"
 	"github.com/spf13/cobra"
 )
 
@@ -25,7 +25,7 @@ func initGetCmd(parent *cobra.Command) error {
 		Use:     "get",
 		Short:   "Retrieve a sandbox request log",
 		Long:    "Retrieve a sandbox request log",
-		Example: "  semva logs get --sandbox-id a0fac35a-bd5d-41d3-a59e-2da4c1e8a360 --request-id 2fd11644-623b-4542-adf8-08c8674cb288",
+		Example: "  twinbay logs get --sandbox-id a0fac35a-bd5d-41d3-a59e-2da4c1e8a360 --request-id 2fd11644-623b-4542-adf8-08c8674cb288",
 		RunE:    runGetCmd,
 	}
 	flagutil.RegisterFlags(cmd, getCmdMeta)

@@ -4,13 +4,13 @@ package sandboxestwins
 
 import (
 	"fmt"
-	"github.com/panoratech/semva-cli/internal/client"
-	"github.com/panoratech/semva-cli/internal/flagutil"
-	"github.com/panoratech/semva-cli/internal/interactive"
-	"github.com/panoratech/semva-cli/internal/output"
-	"github.com/panoratech/semva-cli/internal/sdk"
-	"github.com/panoratech/semva-cli/internal/sdk/models/operations"
-	"github.com/panoratech/semva-cli/internal/usage"
+	"github.com/panoratech/twinbay-cli/internal/client"
+	"github.com/panoratech/twinbay-cli/internal/flagutil"
+	"github.com/panoratech/twinbay-cli/internal/interactive"
+	"github.com/panoratech/twinbay-cli/internal/output"
+	"github.com/panoratech/twinbay-cli/internal/sdk"
+	"github.com/panoratech/twinbay-cli/internal/sdk/models/operations"
+	"github.com/panoratech/twinbay-cli/internal/usage"
 	"github.com/spf13/cobra"
 )
 
@@ -25,7 +25,7 @@ func initStopCmd(parent *cobra.Command) error {
 		Use:     "stop",
 		Short:   "Stop a sandbox twin",
 		Long:    "Queues the container for destruction. Everything it holds is lost.",
-		Example: "  semva sandboxes-twins stop --sandbox-id c596993f-a7ba-4c8f-a8ef-12fa7483b957 --sandbox-twin-id 2bc8e24b-4bd7-43d3-88b9-1466c640d1d1",
+		Example: "  twinbay sandboxes-twins stop --sandbox-id c596993f-a7ba-4c8f-a8ef-12fa7483b957 --sandbox-twin-id 2bc8e24b-4bd7-43d3-88b9-1466c640d1d1",
 		RunE:    runStopCmd,
 	}
 	flagutil.RegisterFlags(cmd, stopCmdMeta)

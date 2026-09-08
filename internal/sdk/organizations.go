@@ -6,24 +6,24 @@ import (
 	"bytes"
 	"context"
 	"fmt"
-	"github.com/panoratech/semva-cli/internal/sdk/models/components"
-	"github.com/panoratech/semva-cli/internal/sdk/models/operations"
-	"github.com/panoratech/semva-cli/internal/sdk/models/sdkerrors"
-	"github.com/panoratech/semva-cli/internal/sdk/sdkinternal/config"
-	"github.com/panoratech/semva-cli/internal/sdk/sdkinternal/hooks"
-	"github.com/panoratech/semva-cli/internal/sdk/sdkinternal/utils"
+	"github.com/panoratech/twinbay-cli/internal/sdk/models/components"
+	"github.com/panoratech/twinbay-cli/internal/sdk/models/operations"
+	"github.com/panoratech/twinbay-cli/internal/sdk/models/sdkerrors"
+	"github.com/panoratech/twinbay-cli/internal/sdk/sdkinternal/config"
+	"github.com/panoratech/twinbay-cli/internal/sdk/sdkinternal/hooks"
+	"github.com/panoratech/twinbay-cli/internal/sdk/sdkinternal/utils"
 	"net/http"
 	"net/url"
 )
 
 // Organizations the caller belongs to. Every authenticated request acts inside exactly one organization — the one its access token names — so these routes address it as `current`.
 type Organizations struct {
-	rootSDK          *Semva
+	rootSDK          *Twinbay
 	sdkConfiguration config.SDKConfiguration
 	hooks            *hooks.Hooks
 }
 
-func newOrganizations(rootSDK *Semva, sdkConfig config.SDKConfiguration, hooks *hooks.Hooks) *Organizations {
+func newOrganizations(rootSDK *Twinbay, sdkConfig config.SDKConfiguration, hooks *hooks.Hooks) *Organizations {
 	return &Organizations{
 		rootSDK:          rootSDK,
 		sdkConfiguration: sdkConfig,

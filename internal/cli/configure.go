@@ -6,9 +6,9 @@ import (
 	"fmt"
 	"github.com/charmbracelet/huh"
 	"github.com/charmbracelet/lipgloss"
-	"github.com/panoratech/semva-cli/internal/config"
-	"github.com/panoratech/semva-cli/internal/output"
-	"github.com/panoratech/semva-cli/internal/usage"
+	"github.com/panoratech/twinbay-cli/internal/config"
+	"github.com/panoratech/twinbay-cli/internal/output"
+	"github.com/panoratech/twinbay-cli/internal/usage"
 	"github.com/spf13/cobra"
 	"golang.org/x/term"
 	"os"
@@ -20,11 +20,11 @@ func initConfigureCmd(parent *cobra.Command) error {
 		Use:   "configure",
 		Short: "Configure authentication credentials and preferences",
 		Long: `Interactively configure authentication credentials and preferences for the CLI.
-Settings are stored in ~/.config/semva/config.yaml.
+Settings are stored in ~/.config/twinbay/config.yaml.
 Secret credentials are stored in the OS keychain when available.
 
-You can also set values via environment variables with the CLI_SEMVA_ prefix
-(e.g., CLI_SEMVA_API_KEY) or pass them as flags to individual commands.
+You can also set values via environment variables with the CLI_TWINBAY_ prefix
+(e.g., CLI_TWINBAY_API_KEY) or pass them as flags to individual commands.
 
 Priority: CLI flags > environment variables > OS keychain > config file`,
 		RunE: runConfigureCmd,
@@ -44,9 +44,9 @@ func runConfigureCmd(cmd *cobra.Command, args []string) error {
 			"configure_blocked",
 			"the 'configure' command is interactive and cannot be used in agent mode",
 			[]string{
-				fmt.Sprintf("Set credentials via environment variables (prefix: %s_)", "CLI_SEMVA"),
+				fmt.Sprintf("Set credentials via environment variables (prefix: %s_)", "CLI_TWINBAY"),
 				"Pass credentials directly as CLI flags for each command",
-				fmt.Sprintf("Run '%s whoami' to verify current authentication", "semva"),
+				fmt.Sprintf("Run '%s whoami' to verify current authentication", "twinbay"),
 			},
 		)
 	}

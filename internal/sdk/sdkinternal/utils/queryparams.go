@@ -12,8 +12,8 @@ import (
 	"reflect"
 	"time"
 
-	"github.com/panoratech/semva-cli/internal/sdk/optionalnullable"
-	"github.com/panoratech/semva-cli/internal/sdk/types"
+	"github.com/panoratech/twinbay-cli/internal/sdk/optionalnullable"
+	"github.com/panoratech/twinbay-cli/internal/sdk/types"
 )
 
 func PopulateQueryParams(_ context.Context, req *http.Request, queryParams interface{}, globals interface{}, allowEmptyValue map[string]struct{}) error {
